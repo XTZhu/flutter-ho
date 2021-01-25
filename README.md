@@ -59,3 +59,8 @@ Flutter 脚手架 快速开发模版
 
 * 2021 -01-20 第三十六天 [Flutter一个精美的登录页面设计被我写成了一个四不像！！！](https://www.bilibili.com/video/BV1D5411E79Z/) -- [【源码】](https://github.com/zhaolongs/flutter-ho/blob/main/lib/src/pages/demo/demo_login.dart)
 * 2021 -01-21 第三十七天 [Flutter 一个两列视频数据展示 列表Demo 只需要三分钟就可以码完](https://www.bilibili.com/video/BV1dz4y1S7E2) -- [【源码】](https://github.com/zhaolongs/flutter-ho/blob/main/lib/src/pages/demo/demo_video_list.dart)
+
+* 2021 -01-22 第三十八天 [Flutter 一个水平渐变颜色的动画进度条](https://www.bilibili.com/video/BV19f4y1k72K/) -- [【源码】](https://github.com/zhaolongs/flutter-ho/blob/main/lib/src/pages/demo/demo_progress.dart)
+* 2021 -01-23 第三十九天 [Flutter 列表数据分组展示、分级展示 直接复制使用](https://www.zhihu.com/zvideo/1336369463822979072)
+* 2021 -01-23 第四十天 [Flutter 一个图片滑动浏览器 滑动到最后一张退出浏览](https://www.zhihu.com/zvideo/1336809945681829889)[【源码】](https://github.com/zhaolongs/flutter-ho/blob/main/lib/src/pages/demo/demo1/demo_image_scan_main_page.dart)
+* 2021 -01-23 第四十一天 [Flutter 图片浏览器滑动到最后一张 拖动打开下一个页面](https://www.zhihu.com/zvideo/1336809945681829889)[【源码】](https://github.com/zhaolongs/flutter-ho/blob/main/lib/src/pages/demo/demo1/demo_image_scan_main_page.dart)

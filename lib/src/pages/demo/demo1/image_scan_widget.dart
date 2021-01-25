@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_ho/src/pages/demo/demo1/targ_image_page.dart';
 import 'package:flutter_ho/src/utils/log_utils.dart';
+import 'package:flutter_ho/src/utils/navigator_utils.dart';
 
 /// 创建人： Created by zhaolong
 /// 创建时间：Created by  on 2021/1/24.
@@ -47,42 +49,60 @@ class _ImageScanWidgetState extends State<ImageScanWidget> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(""),
-      ),
-      backgroundColor: Colors.blueGrey,
+      backgroundColor: Colors.blueGrey.withOpacity(0.9),
 
       ///填充布局
-      body: Center(
-        child: Container(
-          height: 240,
-          child: Stack(
-            children: [
-              //滑动
-              Listener(
-                onPointerDown: (PointerDownEvent event) {
-                  LogUtils.e("onPointerDown");
-                },
-                onPointerUp: (PointerUpEvent event) {
-                  LogUtils.e("onPointerUp");
-                  if(_index==widget.imageList.length-1){
-                    //退出
-                    Navigator.of(context).pop();
-                  }
-                },
-                child: buildPageView(),
-              ),
-              //索引
-              Positioned(
-                bottom: 10,
-                right: 10,
-                child: Text("${_index + 1}/${widget.imageList.length}"),
-              )
-            ],
-          ),
+      body: Container(
+        width: double.infinity,
+        height: double.infinity,
+        child: Stack(
+          children: [
+            //滑动
+            buildListener(context),
+            //索引
+            Positioned(
+              bottom: 40,
+              right: 40,
+              child: Text("${_index + 1}/${widget.imageList.length + 1}"),
+            )
+          ],
         ),
       ),
     );
+  }
+
+  Listener buildListener(BuildContext context) {
+    return Listener(
+      onPointerDown: (PointerDownEvent event) {
+        LogUtils.e("onPointerDown");
+      },
+      onPointerCancel: (PointerCancelEvent event) {
+        LogUtils.e("onPointerCancel");
+        nextFunction(context);
+      },
+      onPointerUp: (PointerUpEvent event) {
+        LogUtils.e("onPointerUp");
+        //替换一个新的页面
+        nextFunction(context);
+      },
+      child: buildPageView(),
+    );
+  }
+
+  void nextFunction(BuildContext context) {
+    if (_index == widget.imageList.length) {
+      LogUtils.e("打开新的页面");
+      //退出
+      //Navigator.of(context).pop();
+      //替换当前页面
+      // Navigator.of(context).pushReplacement(
+      //   new MaterialPageRoute(builder: (BuildContext context) {
+      //     return TagImagePage();
+      //   }),
+      // );
+      NavigatorUtils.pushPageByFade(
+          context: context, targPage: TagImagePage(), isReplace: true);
+    }
   }
 
   PageView buildPageView() {
@@ -95,10 +115,15 @@ class _ImageScanWidgetState extends State<ImageScanWidget> {
         });
       },
       //总个数
-      itemCount: widget.imageList.length,
+      itemCount: widget.imageList.length + 1,
       //每个子Widget
       itemBuilder: (BuildContext context, int index) {
+        if (index == widget.imageList.length) {
+          //目标页面
+          return TagImagePage();
+        }
         return Stack(
+          alignment: Alignment.center,
           children: [
             Image.asset(widget.imageList[index]),
           ],

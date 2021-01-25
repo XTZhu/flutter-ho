@@ -63,6 +63,7 @@ class NavigatorUtils {
     Function(dynamic value) dismissCallBack,
   }) {
     PageRoute pageRoute = PageRouteBuilder(
+      //背景透明 方式打开新的页面
       opaque: opaque,
       pageBuilder: (BuildContext context, Animation<double> animation,
           Animation<double> secondaryAnimation) {

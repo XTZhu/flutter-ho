@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_ho/src/utils/toast_utils.dart';
+
 
 
 /// 创建人： Created by zhaolong
@@ -13,42 +11,11 @@ import 'package:flutter_ho/src/utils/toast_utils.dart';
 /// 代码清单 
 ///代码清单
 
-class TestPage extends StatefulWidget {
-  @override
-  _TestPageState createState() => _TestPageState();
-}
 
-class _TestPageState extends State<TestPage>
-    with SingleTickerProviderStateMixin {
-  //图片数据
-  List<Widget> imageList = [];
+class Test {
 
-  ScrollController _scrollController = new ScrollController();
+  void test(){
 
-  @override
-  void initState() {
-    super.initState();
-
-    ///PageView设置滑动监听
-    _scrollController.addListener(() {
-      //PageView滑动的距离
-      setState(() {});
-    });
-  }
-
-  int _selectIndex = 0;
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("List Demo"),
-      ),
-      backgroundColor: Colors.white,
-
-      ///填充布局
-      body: Container(),
-    );
   }
 
 }
