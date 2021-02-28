@@ -70,4 +70,4 @@ Flutter 脚手架 快速开发模版
 * 2021 -02-13 第四十三天 [Flutter跨平台开发APP 标签轮播切换 动画的组合灵感 第一篇](https://www.ixigua.com/6928734297964675592)[【源码】](https://github.com/zhaolongs/flutter-ho/tree/main/lib/src/pages/demo/demo4)
 * 2021 -02-16 第四十四天 [Flutter跨平台开发APP 标签轮播切换 动画的组合灵感 第二篇](https://www.ixigua.com/6929107103776768516)[【源码】](https://github.com/zhaolongs/flutter-ho/tree/main/lib/src/pages/demo/demo4)
 * 2021 -02-27 第四十五天 [Flutter滑动条 Slider 的详细配置使用](https://www.ixigua.com/6933784858019758595)[【源码】](https://github.com/zhaolongs/flutter-ho/blob/main/lib/src/pages/demo/demo5/slider_demo_page.dart)
-* 2021 -02-27 第四十六天 [Flutter 一个图片浏览效果、共享轴动画](#)[【源码】](https://github.com/zhaolongs/flutter-ho/blob/main/lib/src/pages/demo/demo6)
+* 2021 -02-27 第四十六天 [Flutter 一个图片浏览效果、共享轴动画](https://www.ixigua.com/6934297501512139276)[【源码】](https://github.com/zhaolongs/flutter-ho/blob/main/lib/src/pages/demo/demo6)
