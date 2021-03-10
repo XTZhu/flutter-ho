@@ -45,6 +45,7 @@ class _RootAppState extends State {
         title: Text("测试"),
       ),
       body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text("当前选中 $_currentIndex"),
           Container(
