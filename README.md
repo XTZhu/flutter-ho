@@ -79,3 +79,6 @@ Flutter 脚手架 快速开发模版
 * 2021 -03-09 第四十九天 [Flutter 跨平台App开发 卡片展开的动画效果 Flutter 容器动画](https://www.zhihu.com/zvideo/1352926921022480384)[【源码】](https://github.com/zhaolongs/flutter-ho/blob/main/lib/src/pages/demo/demo8/animation_1_expand_card.dart)
 * 2021 -03-11 第五十天 [Flutter App开发 PageView 动画图片浏览器 微动画视觉](https://www.zhihu.com/zvideo/1353261640809287680)[【源码】](https://github.com/zhaolongs/flutter-ho/blob/main/lib/src/pages/demo/demo8/animation_2_pageview_image.dart) [【码云源码】](https://gitee.com/android.long/flutter-ho/blob/main/lib/src/pages/demo/demo8/animation_2_pageview_image.dart)
 * 2021 -03-12 第五十一天 [Flutter 跨平台App开发 自定义路由动画 自定义页面显示位置](https://www.zhihu.com/zvideo/1353620887812374528)[【github源码】](https://github.com/zhaolongs/flutter-ho/blob/main/lib/src/pages/demo/demo8/animation_3_grid_image.dart)  [【码云源码】](https://gitee.com/android.long/flutter-ho/blob/main/lib/src/pages/demo/demo8/animation_3_grid_image.dart)
+
+
+* 2021 -03-16 第五十二天 [Flutter App开发 弹簧动画 不一样的效果 提升不一样的应用体验](https://www.ixigua.com/6940045441522205221)[【github源码】](https://github.com/zhaolongs/flutter-ho/blob/main/lib/src/pages/demo/demo9/animation_4_list_image.dart)  [【码云源码】](https://gitee.com/android.long/flutter-ho/blob/main/lib/src/pages/demo/demo9/animation_4_list_image.dart)
