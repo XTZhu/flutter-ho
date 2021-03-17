@@ -96,6 +96,8 @@ class NavigatorUtils {
   }
 
   ///中间缩放的形式打开页面
+  /// 开源项目  Flutter-HO 早起的年轻人
+  /// github https://github.com/zhaolongs/flutter-ho
   static void pushPageByCenterScale({
     @required BuildContext context,
     @required Widget targPage,
