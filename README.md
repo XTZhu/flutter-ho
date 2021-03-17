@@ -82,3 +82,5 @@ Flutter 脚手架 快速开发模版
 
 
 * 2021 -03-16 第五十二天 [Flutter App开发 弹簧动画 不一样的效果 提升不一样的应用体验](https://www.ixigua.com/6940045441522205221)[【github源码】](https://github.com/zhaolongs/flutter-ho/blob/main/lib/src/pages/demo/demo9/animation_4_list_image.dart)  [【码云源码】](https://gitee.com/android.long/flutter-ho/blob/main/lib/src/pages/demo/demo9/animation_4_list_image.dart)
+* 2021 -03-16 第五十二天 [Flutter App开发 弹簧动画 不一样的效果 提升不一样的应用体验](https://www.ixigua.com/6940045441522205221)[【github源码】](https://github.com/zhaolongs/flutter-ho/blob/main/lib/src/pages/demo/demo10/segment_demo.dart)  [【码云源码】](https://gitee.com/android.long/flutter-ho/blob/main/lib/src/pages/demo/demo10/segment_demo.dart)
+
