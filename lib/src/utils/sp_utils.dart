@@ -63,7 +63,7 @@ class SPUtil {
   ///返回的是 Map<String,dynamic> 类型数据
   static dynamic getObject(String key) {
     String _data = _sharedPreferences.getString(key);
-    return (_data == null || _data.isEmpty) ? null : json.decode(_data);
+    return (_data.isEmpty) ? null : json.decode(_data);
   }
 
   ///保存列表数据

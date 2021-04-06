@@ -18,7 +18,7 @@ class WelcomeVideoWidget extends StatefulWidget {
 
 class _WelcomeVideoWidgetState extends State<WelcomeVideoWidget> {
   //创建视频播放控制器
-  VideoPlayerController _controller;
+   VideoPlayerController _controller;
 
   @override
   void initState() {

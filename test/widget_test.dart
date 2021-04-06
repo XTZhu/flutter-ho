@@ -29,6 +29,15 @@ void main() {
 
 
 
+    ///final String message = 'Hello World';
+    // 直接赋值
+    const String message = 'Hello World';
+    //结合其他 const 变量
+    const String message2 = message+"WAWA";
+
 
   });
+
+
+
 }

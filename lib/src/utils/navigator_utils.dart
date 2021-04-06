@@ -17,10 +17,10 @@ class NavigatorUtils {
   ///[targPage] 目标页面
   ///[isReplace] 是否替换当前页面  A -B
   static void pushPage({
-    @required BuildContext context,
-    @required Widget targPage,
+     BuildContext context,
+     Widget targPage,
     bool isReplace = false,
-    Function(dynamic value) dismissCallBack,
+     Function(dynamic value) dismissCallBack,
   }) {
     PageRoute pageRoute;
 

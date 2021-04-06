@@ -24,7 +24,7 @@ class WelcomeTimeWidget extends StatefulWidget {
 class _WelcomeTimeWidgetState extends State<WelcomeTimeWidget> {
   int currentTime = 5;
 
-  Timer _timer;
+   Timer _timer;
 
   @override
   void initState() {
