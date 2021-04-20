@@ -73,16 +73,16 @@ class _DemoSlidableState extends State<DemoSlidable> {
 
   List<Widget> secondaryActionsArray() {
     return [
-      SlideAction(
-        child: Container(
-          color: Colors.blueGrey,
-          child: Text("测试"),
-        ),
-      ),
-      SlideAction(
-        color: Colors.red,
-        child: Text("测试2"),
-      ),
+      // SlideAction(
+      //   child: Container(
+      //     color: Colors.blueGrey,
+      //     child: Text("测试"),
+      //   ),
+      // ),
+      // SlideAction(
+      //   color: Colors.red,
+      //   child: Text("测试2"),
+      // ),
       IconSlideAction(
         icon: Icons.add,
         color: Colors.red,
