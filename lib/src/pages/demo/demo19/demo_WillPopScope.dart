@@ -24,6 +24,9 @@ class DemoWillPopScope extends StatefulWidget {
 }
 
 class _DemoWillPopScopeState extends State<DemoWillPopScope> {
+
+
+  //上一次点击事件
   int pretime = 0;
 
   @override
@@ -32,9 +35,12 @@ class _DemoWillPopScopeState extends State<DemoWillPopScope> {
     return WillPopScope(
       onWillPop: () async {
         print("返回");
+        //当前时间
         int now = DateTime.now().millisecond;
+        //计算时间差
         int flag = now - pretime;
-        if(flag>1000){
+        //两次点击时间太长不做处理
+        if (flag > 1000) {
           print("返回1");
           pretime = now;
           return false;
@@ -58,20 +64,29 @@ class _DemoWillPopScopeState extends State<DemoWillPopScope> {
     );
   }
 
-  void showTips() {
-    showDialog(
+  void showTips() async {
+    bool flag = await showDialog<bool>(
         context: context,
         builder: (BuildContext context) {
           return new AlertDialog(
             title: Text("提示"),
             content: Text("您确定要退出吗???"),
             actions: [
-              TextButton(onPressed: (){}, child: Text("确定")),
-              TextButton(onPressed: (){
-                Navigator.of(context).pop();
-              }, child: Text("取消"))
+              TextButton(
+                  onPressed: () {
+                    Navigator.of(context).pop(true);
+                  },
+                  child: Text("确定")),
+              TextButton(
+                  onPressed: () {
+                    Navigator.of(context).pop(false);
+                  },
+                  child: Text("取消"))
             ],
           );
         });
+    if (flag) {
+      //退出当前页面
+    }
   }
 }
