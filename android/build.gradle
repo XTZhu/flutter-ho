@@ -1,7 +1,21 @@
 buildscript {
     repositories {
-        google()
+       
+        maven { url "https://maven.aliyun.com/repository/central" }
+        maven { url "https://maven.aliyun.com/repository/public" }
+
+        maven { url "https://maven.aliyun.com/repository/gradle-plugin" }
+        maven { url "http://download.flutter.io" }
+        maven { url 'https://storage.flutter-io.cn'}
+        maven { url 'https://www.jitpack.io' }
+        maven { url 'https://jitpack.io' }
+        maven { url 'https://developer.huawei.com/repo/' }
+        maven { url 'https://dl.bintray.com/umsdk/release' }
+        maven { url 'http://oss.sonatype.org/content/repositories/snapshots' }
+        maven { url 'https://maven.aliyun.com/repository/google' }
         jcenter()
+        google()
+        mavenCentral()
     }
 
     dependencies {
@@ -11,8 +25,21 @@ buildscript {
 
 allprojects {
     repositories {
-        google()
+        maven { url "https://maven.aliyun.com/repository/central" }
+        maven { url "https://maven.aliyun.com/repository/public" }
+
+        maven { url "https://maven.aliyun.com/repository/gradle-plugin" }
+        maven { url "http://download.flutter.io" }
+        maven { url 'https://storage.flutter-io.cn'}
+        maven { url 'https://www.jitpack.io' }
+        maven { url 'https://jitpack.io' }
+        maven { url 'https://developer.huawei.com/repo/' }
+        maven { url 'https://dl.bintray.com/umsdk/release' }
+        maven { url 'http://oss.sonatype.org/content/repositories/snapshots' }
+        maven { url 'https://maven.aliyun.com/repository/google' }
         jcenter()
+        google()
+        mavenCentral()
     }
 }
 
