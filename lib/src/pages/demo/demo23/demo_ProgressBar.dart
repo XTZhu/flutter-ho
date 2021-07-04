@@ -5,6 +5,7 @@ import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 /// 创建人： Created by zhaolong
 
@@ -68,6 +69,12 @@ class _DemoBackdropFilterPageState extends State<DemoBackdropFilterPage>
 
   @override
   Widget build(BuildContext context) {
+    List<String> testList = ["test1", "xioming", "张三", "xioming", "张三", "李四"];
+    print(testList); //[test1, xioming, 张三, xioming, 张三, 李四]
+//将list转为set,将后面重复的都去掉
+    Map<int, String> map = testList.asMap();
+    print(map); //{0: test1, 1: xioming, 2: 张三, 3: xioming, 4: 张三, 5: 李四}
+
     //
     return Scaffold(
       floatingActionButton: FloatingActionButton(
@@ -78,17 +85,33 @@ class _DemoBackdropFilterPageState extends State<DemoBackdropFilterPage>
       ),
       backgroundColor: Colors.black,
       body: Center(
-        child: Container(
-          width: 222,
-          height: 222,
-          child: CustomProgressWidget(
-            progress: _currentValue,
-            title: "$_currentValue",
-            total: 100,
-            controller: _dragController,
-          ),
-        ),
+        child: buildContainer(),
       ),
+    );
+  }
+
+  Container buildContainer() {
+    return Container(
+      width: 222,
+      height: 222,
+      child: CustomProgressWidget(
+        progress: _currentValue,
+        title: "$_currentValue",
+        total: 100,
+        controller: _dragController,
+      ),
+    );
+  }
+
+  Widget buildTextField7() {
+    return new TextField(
+      //设置最大行数为3行
+      maxLines: 10,
+      //输入文本格式过滤
+      inputFormatters: [
+        //限制单行
+        BlacklistingTextInputFormatter.singleLineFormatter
+      ],
     );
   }
 }
