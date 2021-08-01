@@ -16,68 +16,56 @@ main() {
     //不显示 debug标签
     debugShowCheckedModeBanner: false,
     //显示的首页面
-    home: DemoAlignPage(),
+    home: DemoPositionedPage(),
   ));
 }
 
 ///代码清单
-class DemoAlignPage extends StatefulWidget {
+class DemoPositionedPage extends StatefulWidget {
   @override
-  _DemoAlignPageState createState() => _DemoAlignPageState();
+  _DemoPositionedPageState createState() => _DemoPositionedPageState();
 }
 
-class _DemoAlignPageState extends State<DemoAlignPage> {
+class _DemoPositionedPageState extends State<DemoPositionedPage> {
+  double _top = 100;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text("这里是首页")),
       body: Container(
-        child: AnimatedAlign(
+        width: double.infinity,
+        height: double.infinity,
+        child: Stack(
           alignment: Alignment.center,
-          //动画曲线
-          curve: Curves.bounceInOut,
-          //动画执行完成
-          onEnd: () {
-            print("执行结束 ");
-          },
-          duration: Duration(seconds: 2),
-          child: Text(
-            "早起的年轻人",
-            style: TextStyle(
-              fontWeight: FontWeight.w600,
-              color: Colors.blueAccent,
-            ),
-          ),
+          children: [
+            AnimatedPositioned(
+              top: 400,
+              left: 100,
+              //动画时间
+              duration: Duration(seconds: 2),
+              //动画曲线
+              curve: Curves.bounceIn,
+              onEnd: () {
+                print("动画执行完成");
+              },
+              child: Text(
+                "早起的年轻人",
+                style: TextStyle(
+                  fontWeight: FontWeight.w600,
+                  color: Colors.blueAccent,
+                ),
+              ),
+            )
+          ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
         child: Text("切换"),
-        onPressed: () {},
-      ),
-    );
-  }
-}
-
-class TestWidget extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text("这里是首页")),
-      body: Container(
-        child: Align(
-          alignment: Alignment.center,
-          child: Text(
-            "早起的年轻人",
-            style: TextStyle(
-              fontWeight: FontWeight.w600,
-              color: Colors.blueAccent,
-            ),
-          ),
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        child: Text("切换"),
-        onPressed: () {},
+        onPressed: () {
+          setState(() {
+            _top += 20;
+          });
+        },
       ),
     );
   }

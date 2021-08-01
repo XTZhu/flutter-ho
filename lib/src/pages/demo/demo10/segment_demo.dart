@@ -37,7 +37,10 @@ class _SegmentPageState extends State {
         height: double.infinity,
         child: Column(
           children: [
-            buildSegment(),
+            SizedBox(
+              height: 3,
+            ),
+            // buildSegment(),
             buildSlidSegment(),
           ],
         ),
@@ -45,39 +48,36 @@ class _SegmentPageState extends State {
     );
   }
 
-  int _currentIndex = 0;
-
   buildSegment() {
-    return Container(
-      margin: EdgeInsets.only(top: 20),
-      width: 300,
-      child: CupertinoSegmentedControl(
-        //子标签
-        children: <int, Widget>{
-          0: Text("全部"),
-          1: Text("收入"),
-          2: Text("支出 "),
-        },
-        //当前选中的索引
-        groupValue: _currentIndex,
-        //点击回调
-        onValueChanged: (int index) {
-          print("当前选中 $index");
-          setState(() {
-            _currentIndex = index;
-          });
-        },
-        //选中的背景颜色
-        selectedColor: Colors.blue,
-        //未选中的背景颜色
-        unselectedColor: Colors.white,
-        //边框颜色
-        borderColor: Colors.blue,
-        //按下的颜色
-        pressedColor:  Colors.blue.withOpacity(0.4),
-      ),
+    return CupertinoSegmentedControl(
+      //子标签
+      children: <int, Widget>{
+        0: Text("全部"),
+        1: Text("收入"),
+        2: Text("支出 "),
+      },
+      //当前选中的索引
+      groupValue: _currentIndex,
+      //点击回调
+      onValueChanged: (int index) {
+        print("当前选中 $index");
+        setState(() {
+          _currentIndex = index;
+        });
+      },
+      //选中的背景颜色
+      selectedColor: Colors.blue,
+      //未选中的背景颜色
+      unselectedColor: Colors.white,
+      //边框颜色
+      borderColor: Colors.blue,
+      //按下的颜色
+      pressedColor: Colors.blue.withOpacity(0.4),
     );
   }
+
+  //当前选中的索引
+  int _currentIndex = 0;
 
   buildSlidSegment() {
     return Container(

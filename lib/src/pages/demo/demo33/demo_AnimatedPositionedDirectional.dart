@@ -16,18 +16,19 @@ main() {
     //不显示 debug标签
     debugShowCheckedModeBanner: false,
     //显示的首页面
-    home: DemoPositionedPage(),
+    home: DemoAnimatedPositionedDirectionalPage(),
   ));
 }
 
 ///代码清单
-class DemoPositionedPage extends StatefulWidget {
+class DemoAnimatedPositionedDirectionalPage extends StatefulWidget {
   @override
-  _DemoPositionedPageState createState() => _DemoPositionedPageState();
+  _DemoAnimatedPositionedDirectionalPageState createState() =>
+      _DemoAnimatedPositionedDirectionalPageState();
 }
 
-class _DemoPositionedPageState extends State<DemoPositionedPage> {
-  double _top = 100;
+class _DemoAnimatedPositionedDirectionalPageState
+    extends State<DemoAnimatedPositionedDirectionalPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,37 +36,30 @@ class _DemoPositionedPageState extends State<DemoPositionedPage> {
       body: Container(
         width: double.infinity,
         height: double.infinity,
-        child: Stack(
-          alignment: Alignment.center,
-          children: [
-            AnimatedPositioned(
-              top: 400,
-              left: 100,
-              //动画时间
-              duration: Duration(seconds: 2),
-              //动画曲线
-              curve: Curves.bounceIn,
-              onEnd: () {
-                print("动画执行完成");
-              },
-              child: Text(
-                "早起的年轻人",
-                style: TextStyle(
-                  fontWeight: FontWeight.w600,
-                  color: Colors.blueAccent,
+        child: Directionality(
+          // TextDirection.ltr  left to right  从左到右
+          //  TextDirection.rtl rtl right to left
+          textDirection: TextDirection.ltr,
+          child: Stack(
+            children: [
+              AnimatedPositionedDirectional(
+                top: 100,
+                start: 300,
+                width: 100,
+                height: 200,
+                duration: Duration(seconds: 2),
+                //执行结束回调
+                onEnd: () {},
+                //动画曲线
+                curve: Curves.fastOutSlowIn,
+                child: Container(
+                  color: Colors.blue,
+                  child: Text("早起的年轻人"),
                 ),
               ),
-            )
-          ],
+            ],
+          ),
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        child: Text("切换"),
-        onPressed: () {
-          setState(() {
-            _top += 20;
-          });
-        },
       ),
     );
   }

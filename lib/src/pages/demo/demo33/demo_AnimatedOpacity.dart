@@ -16,19 +16,19 @@ main() {
     //不显示 debug标签
     debugShowCheckedModeBanner: false,
     //显示的首页面
-    home: DemoAnimatedPositionedDirectionalPage(),
+    home: DemoAnimatedOpacity(),
   ));
 }
 
 ///代码清单
-class DemoAnimatedPositionedDirectionalPage extends StatefulWidget {
+class DemoAnimatedOpacity extends StatefulWidget {
   @override
-  _DemoAnimatedPositionedDirectionalPageState createState() =>
-      _DemoAnimatedPositionedDirectionalPageState();
+  _DemoAnimatedOpacityState createState() => _DemoAnimatedOpacityState();
 }
 
-class _DemoAnimatedPositionedDirectionalPageState
-    extends State<DemoAnimatedPositionedDirectionalPage> {
+class _DemoAnimatedOpacityState extends State<DemoAnimatedOpacity> {
+  double _opacity = 0.0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,30 +36,36 @@ class _DemoAnimatedPositionedDirectionalPageState
       body: Container(
         width: double.infinity,
         height: double.infinity,
-        child: Directionality(
-          // TextDirection.ltr  left to right  从左到右
-          //  TextDirection.rtl rtl right to left
-          textDirection: TextDirection.ltr,
-          child: Stack(
-            children: [
-              AnimatedPositionedDirectional(
-                top: 100,
-                start: 300,
-                width: 100,
-                height: 200,
-                duration: Duration(seconds: 2),
-                //执行结束回调
-                onEnd: () {},
-                //动画曲线
-                curve: Curves.fastOutSlowIn,
-                child: Container(
-                  color: Colors.blue,
-                  child: Text("早起的年轻人"),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            AnimatedOpacity(
+              //动画时间
+              duration: Duration(seconds: 2),
+              //透明度
+              opacity: _opacity,
+              //动画执行结束回调
+              onEnd: () {},
+              //动画曲线
+              curve: Curves.fastOutSlowIn,
+              child: Container(
+                padding: EdgeInsets.all(20),
+                child: FlutterLogo(
+                  size: 100,
                 ),
+                color: Colors.grey,
               ),
-            ],
-          ),
+            ),
+          ],
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          setState(() {
+            _opacity = _opacity == 0.0 ? 1.0 : 0.0;
+          });
+        },
+        child: Text("显示"),
       ),
     );
   }

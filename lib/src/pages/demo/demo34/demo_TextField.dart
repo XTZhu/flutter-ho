@@ -16,68 +16,35 @@ main() {
     //不显示 debug标签
     debugShowCheckedModeBanner: false,
     //显示的首页面
-    home: DemoAlignPage(),
+    home: DemoTextFieldPage(),
   ));
 }
 
 ///代码清单
-class DemoAlignPage extends StatefulWidget {
+class DemoTextFieldPage extends StatefulWidget {
   @override
-  _DemoAlignPageState createState() => _DemoAlignPageState();
+  _DemoTextFieldPageState createState() => _DemoTextFieldPageState();
 }
 
-class _DemoAlignPageState extends State<DemoAlignPage> {
+class _DemoTextFieldPageState extends State<DemoTextFieldPage> {
+  TextEditingController _textEditingController = new TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text("这里是首页")),
       body: Container(
-        child: AnimatedAlign(
-          alignment: Alignment.center,
-          //动画曲线
-          curve: Curves.bounceInOut,
-          //动画执行完成
-          onEnd: () {
-            print("执行结束 ");
-          },
-          duration: Duration(seconds: 2),
-          child: Text(
-            "早起的年轻人",
-            style: TextStyle(
-              fontWeight: FontWeight.w600,
-              color: Colors.blueAccent,
+        child: Column(
+          children: [
+            TextField(
+              controller: _textEditingController,
             ),
-          ),
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        child: Text("切换"),
-        onPressed: () {},
-      ),
-    );
-  }
-}
-
-class TestWidget extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text("这里是首页")),
-      body: Container(
-        child: Align(
-          alignment: Alignment.center,
-          child: Text(
-            "早起的年轻人",
-            style: TextStyle(
-              fontWeight: FontWeight.w600,
-              color: Colors.blueAccent,
+            SizedBox(
+              height: 33,
             ),
-          ),
+            ElevatedButton(onPressed: () {}, child: Text("动态设置"))
+          ],
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        child: Text("切换"),
-        onPressed: () {},
       ),
     );
   }

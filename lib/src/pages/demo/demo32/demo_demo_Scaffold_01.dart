@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import 'TimerPicker.dart';
+
 /// 创建人： Created by zhaolong
 /// 创建时间：Created by  on 3/26/21.
 ///
@@ -28,6 +30,7 @@ class DemoScaffold01Page extends StatefulWidget {
 
 class _DemoScaffold01PageState extends State<DemoScaffold01Page> {
   GlobalKey _globalKey = GlobalKey();
+
   @override
   Widget build(BuildContext context) {
     if (_globalKey.currentContext != null) {
@@ -52,49 +55,17 @@ class _DemoScaffold01PageState extends State<DemoScaffold01Page> {
 
         ///点击响应事
         onPressed: () {
-          print("点击了 FloatingActionButton");
+          showDialog(
+              context: context,
+              builder: (context) {
+                return TimerPicker(
+                  callback: (a) async {
+                    print(a);
+                  },
+                );
+              });
         },
-
-        ///长按提示
-        tooltip: "点击了 tooltip s ",
-
-        ///设置悬浮按钮的背景
-        backgroundColor: Colors.red,
-
-        ///获取焦点时显示的颜色
-        focusColor: Colors.green,
-
-        ///鼠标悬浮在按钮上时显示的颜色
-        hoverColor: Colors.yellow,
-
-        ///水波纹颜色
-        splashColor: Colors.deepPurple,
-
-        ///定义前景色 主要影响文字的颜色
-        foregroundColor: Colors.black,
-
-        ///配制阴影高度 未点击时
-        elevation: 0.0,
-
-        ///配制阴影高度 点击时
-        highlightElevation: 20.0,
-        mini: true,
       ),
-
-      ///用来控制  FloatingActionButton 的位置
-      ///FloatingActionButtonLocation.endFloat 右下角 默认 浮动
-      ///FloatingActionButtonLocation.endDocked 右下角 无浮动效果 无间隔
-      ///FloatingActionButtonLocation.endTop 右上角
-      ///
-      /// FloatingActionButtonLocation.centerDocked 居中（底部）） 无浮动效果 无间隔
-      /// FloatingActionButtonLocation.centerFloat 居中（底部） 浮动
-      ///FloatingActionButtonLocation.centerTop 居中（顶部） 浮动
-      ///
-      /// FloatingActionButtonLocation.startTop 顶部 左对齐
-      /// FloatingActionButtonLocation.startFloat 左下角 浮动
-      ///  FloatingActionButtonLocation.startFloat 左下角 不浮动
-
-      floatingActionButtonLocation: FloatingActionButtonLocation.startFloat,
     );
   }
 }
