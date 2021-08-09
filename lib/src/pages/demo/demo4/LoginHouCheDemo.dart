@@ -26,7 +26,7 @@ class LoginHouCheDemoPage extends StatefulWidget {
 class _LoginHouCheDemoPageState extends State<LoginHouCheDemoPage>
     with SingleTickerProviderStateMixin {
   //动画控制器
-  AnimationController _animationController;
+  late AnimationController _animationController;
 
   double _flagValue = 0.0;
 
@@ -145,24 +145,23 @@ class _LoginHouCheDemoPageState extends State<LoginHouCheDemoPage>
         //中间的
         Positioned(
           //120~20
-          top: 120 - 100 * _flagValue+100*_topValue,
+          top: 120 - 100 * _flagValue + 100 * _topValue,
           //20~60
-          left: 20 + 40 * _flagValue+40*_topValue,
+          left: 20 + 40 * _flagValue + 40 * _topValue,
           //20~60
-          right: 20 + 40 * _flagValue+40*_topValue,
-          height: 70 - 10 * _flagValue-10*_topValue,
+          right: 20 + 40 * _flagValue + 40 * _topValue,
+          height: 70 - 10 * _flagValue - 10 * _topValue,
           child: GestureDetector(
-            onTap: (){
-              if(_clickFlag==2){
+            onTap: () {
+              if (_clickFlag == 2) {
                 _clickFlag = 1;
                 _animationController.reset();
                 _animationController.forward();
-              }else if(_clickFlag==1){
+              } else if (_clickFlag == 1) {
                 _clickFlag = 2;
                 _animationController.reset();
                 _animationController.forward();
               }
-
             },
             child: FlowFliterWidget(
               flag: 0.5 * _flagValue,

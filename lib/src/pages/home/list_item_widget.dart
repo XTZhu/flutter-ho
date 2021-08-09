@@ -17,7 +17,7 @@ class ListViewItemWidget extends StatefulWidget {
   final StreamController streamController;
   final isScroll;
 
-  ListViewItemWidget({this.streamController, this.isScroll = false});
+  ListViewItemWidget({required this.streamController, this.isScroll = false});
 
   @override
   _ListViewItemWidgetState createState() => _ListViewItemWidgetState();

@@ -21,8 +21,8 @@ class PermissionRequestWidget extends StatefulWidget {
   final String leftButtonText;
 
   PermissionRequestWidget(
-      {@required this.permission,
-      @required this.permissionList,
+      {required this.permission,
+      required this.permissionList,
       this.leftButtonText = "再考虑一下",
       this.isCloseApp = false});
 
@@ -39,7 +39,9 @@ class _PermissionRequestWidgetState extends State<PermissionRequestWidget>
     super.initState();
     checkPermisson();
     //注册观察者
-    WidgetsBinding.instance.addObserver(this);
+    if (WidgetsBinding.instance != null) {
+      WidgetsBinding.instance!.addObserver(this);
+    }
   }
 
   @override
@@ -50,7 +52,12 @@ class _PermissionRequestWidgetState extends State<PermissionRequestWidget>
     }
   }
 
-  void checkPermisson({PermissionStatus status}) async {
+  ///[PermissionStatus.denied] 用户拒绝访问所请求的特性
+  ///[PermissionStatus.granted] 用户被授予对所请求特性的访问权。
+  ///[PermissionStatus.restricted] iOS 平台 用户拒绝这个权限
+  ///[PermissionStatus.limited] 用户已授权此应用程序进行有限访问。
+  ///[PermissionStatus.permanentlyDenied] 被永久拒绝
+  void checkPermisson({PermissionStatus? status}) async {
     //权限
     Permission permission = widget.permission;
 
@@ -59,7 +66,7 @@ class _PermissionRequestWidgetState extends State<PermissionRequestWidget>
       status = await permission.status;
     }
 
-    if (status.isUndetermined) {
+    if (!status.isLimited) {
       //第一次申请
       showPermissonAlert(widget.permissionList[0], "同意", permission);
     } else if (status.isDenied) {
@@ -139,8 +146,8 @@ class _PermissionRequestWidgetState extends State<PermissionRequestWidget>
   void requestPermissionList(List<Permission> list) async {
     //多个权限申请
     Map<Permission, PermissionStatus> statuses = await [
-    Permission.location,
-        Permission.storage,
+      Permission.location,
+      Permission.storage,
     ].request();
   }
 
@@ -152,7 +159,9 @@ class _PermissionRequestWidgetState extends State<PermissionRequestWidget>
   @override
   void dispose() {
     //注销观察者
-    WidgetsBinding.instance.removeObserver(this);
+    if (WidgetsBinding.instance != null) {
+      WidgetsBinding.instance!.removeObserver(this);
+    }
 
     super.dispose();
   }

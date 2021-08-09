@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_ho/src/utils/log_utils.dart';
 import 'package:video_player/video_player.dart';
 
-
 /// 创建人： Created by zhaolong
 /// 创建时间：Created by  on 2020/12/18.
 ///
@@ -18,7 +17,7 @@ import 'package:video_player/video_player.dart';
 class VideoDetailsWidget extends StatefulWidget {
   final StreamController streamController;
 
-  VideoDetailsWidget({this.streamController});
+  VideoDetailsWidget({required this.streamController});
 
   @override
   _VideoDetails2WidgetState createState() => _VideoDetails2WidgetState();
@@ -26,7 +25,7 @@ class VideoDetailsWidget extends StatefulWidget {
 
 class _VideoDetails2WidgetState extends State<VideoDetailsWidget> {
   //创建视频播放控制器
-  VideoPlayerController _controller;
+  late VideoPlayerController _controller;
   bool _isPlay = false;
 
   @override
@@ -53,6 +52,7 @@ class _VideoDetails2WidgetState extends State<VideoDetailsWidget> {
     _controller.dispose();
     super.dispose();
   }
+
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -78,7 +78,6 @@ class _VideoDetails2WidgetState extends State<VideoDetailsWidget> {
     );
   }
 
-
   Widget buildControllerWidget() {
     if (_isPlay) {
       //如果正在播放
@@ -103,7 +102,7 @@ class _VideoDetails2WidgetState extends State<VideoDetailsWidget> {
             //视频的总长度
             Duration duration = _controller.value.duration;
 
-            if(postion==duration){
+            if (postion == duration) {
               //播放完毕 再点击播放时，当播放位置滑动到开始位置
               _controller.seekTo(Duration.zero);
             }
@@ -120,5 +119,4 @@ class _VideoDetails2WidgetState extends State<VideoDetailsWidget> {
       ),
     );
   }
-
 }

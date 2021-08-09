@@ -33,7 +33,7 @@ class _HomeItemDemoPageState extends State<HomeItemDemoPage>
   //滑动控制器
   ScrollController _scrollController = new ScrollController();
 
-  TabController _tabController;
+  late TabController _tabController;
 
   @override
   void initState() {
@@ -98,7 +98,7 @@ class _HomeItemDemoPageState extends State<HomeItemDemoPage>
                     indicatorColor: Colors.blueGrey,
                     labelColor: Colors.blueGrey,
                     //下划线的宽度
-                    indicatorSize:TabBarIndicatorSize.label,
+                    indicatorSize: TabBarIndicatorSize.label,
                     controller: _tabController,
                     tabs: [
                       Tab(

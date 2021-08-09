@@ -16,13 +16,13 @@ enum ImageType {
 ///
 class SelectPhotoWidget extends StatefulWidget {
   ///每次点击选择图片后的回调
-  final Function(List<String>) imageSelectAction;
+  final Function(List<String>)? imageSelectAction;
 
   ///自定义标题
-  final Widget header;
+  final Widget? header;
 
   ///标题下的小捍
-  final String tips;
+  final String? tips;
 
   ///预显示使用的图片
   final List<String> imageList;
@@ -34,10 +34,10 @@ class SelectPhotoWidget extends StatefulWidget {
   final ImageType imageType;
 
   const SelectPhotoWidget(
-      {Key key,
+      {Key? key,
       this.header,
       this.tips,
-      this.imageList,
+      required this.imageList,
       this.imageType = ImageType.asset,
       this.imageSelectAction,
       this.maxSelect = 5})
@@ -67,7 +67,7 @@ class _SelectPhotoWidgetState extends State<SelectPhotoWidget>
       }
     }
     //绑定视图监听
-    WidgetsBinding.instance.addObserver(this);
+    WidgetsBinding.instance!.addObserver(this);
   }
 
   @override
@@ -91,7 +91,7 @@ class _SelectPhotoWidgetState extends State<SelectPhotoWidget>
   @override
   void dispose() {
     //解绑视图监听
-    WidgetsBinding.instance.removeObserver(this);
+    WidgetsBinding.instance!.removeObserver(this);
     super.dispose();
   }
 
@@ -134,7 +134,7 @@ class _SelectPhotoWidgetState extends State<SelectPhotoWidget>
   }
 
   buildTipsWidget() {
-    if (widget.tips == null || widget.tips.length == 0) {
+    if (widget.tips == null || widget.tips!.length == 0) {
       return Container();
     }
     return Container(
@@ -276,7 +276,9 @@ class _SelectPhotoWidgetState extends State<SelectPhotoWidget>
   void onDeleteImageFunction(int index) {
     _imageList.removeAt(index);
     setState(() {});
-    widget.imageSelectAction(_imageList);
+    if (widget.imageSelectAction != null) {
+      widget.imageSelectAction!(_imageList);
+    }
   }
 
   void onSelectImageFunction() async {
@@ -288,7 +290,9 @@ class _SelectPhotoWidgetState extends State<SelectPhotoWidget>
     if (localImageUrl.length > 0) {
       _imageList.add(localImageUrl);
       setState(() {});
-      widget.imageSelectAction(_imageList);
+      if (widget.imageSelectAction != null) {
+        widget.imageSelectAction!(_imageList);
+      }
     }
   }
 }

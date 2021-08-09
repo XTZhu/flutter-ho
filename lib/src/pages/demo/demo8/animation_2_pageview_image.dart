@@ -28,7 +28,7 @@ class PageViewImagePage extends StatefulWidget {
 
 class _PageViewImagePageState extends State {
   //控制器
-  PageController _pageController;
+  late PageController _pageController;
 
   @override
   void initState() {
@@ -92,10 +92,10 @@ class _PageViewImagePageState extends State {
         //动画构建器
         return AnimatedBuilder(
           animation: _pageController,
-          builder: (BuildContext context, Widget child) {
-            double page =1.0;
-            if(_hasLoading){
-              page = _pageController.page;
+          builder: (BuildContext context, Widget? child) {
+            double page = 1.0;
+            if (_hasLoading) {
+              page = _pageController.page!;
             }
             // -1 0 1
             double result = page - index;

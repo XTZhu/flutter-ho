@@ -12,9 +12,9 @@ import 'package:flutter_ho/src/bean/bean_art.dart';
 /// 代码清单
 ///代码清单
 class HomeItemArtWidget extends StatefulWidget {
-  final  ArtBean artBean ;
+  final ArtBean artBean;
 
-  HomeItemArtWidget({this.artBean});
+  HomeItemArtWidget({required this.artBean});
 
   @override
   _HomeItemArtWidgetState createState() => _HomeItemArtWidgetState();

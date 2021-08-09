@@ -24,7 +24,7 @@ class AWidget extends StatefulWidget {
 
 class _AWidgetState extends State<AWidget> {
   int _result = 0;
-  StreamSubscription _streamSubscription;
+  late StreamSubscription _streamSubscription;
   @override
   void initState() {
     super.initState();
@@ -58,7 +58,7 @@ class _AWidgetState extends State<AWidget> {
         stream: abStreamController.stream,
         initialData: _result,
         builder: (BuildContext context, AsyncSnapshot<int> snapshot) {
-          _result = snapshot.data;
+          _result = snapshot.data!;
           return Text("A中的数据 ${snapshot.data}");
         },
       ),

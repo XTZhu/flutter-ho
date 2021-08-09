@@ -40,7 +40,7 @@ class _BubbleWidgetState extends State<BubbleWidget>
   double maxTheta = 2.0 * pi;
 
   //动画控制器
-  AnimationController _animationController;
+  late AnimationController _animationController;
 
   @override
   void initState() {

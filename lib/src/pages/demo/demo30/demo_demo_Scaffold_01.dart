@@ -30,12 +30,6 @@ class _DemoScaffold01PageState extends State<DemoScaffold01Page> {
   GlobalKey _globalKey = GlobalKey();
   @override
   Widget build(BuildContext context) {
-    if (_globalKey.currentContext != null) {
-      RenderBox _renderBox = _globalKey.currentContext.findRenderObject();
-      Offset centerRightOffset = _renderBox.paintBounds.bottomLeft;
-      print("centerRightOffset $centerRightOffset");
-    }
-
     ///使用 Scaffold 组件来构建应用的基本页面
     /// 页面的架构
     return Scaffold(

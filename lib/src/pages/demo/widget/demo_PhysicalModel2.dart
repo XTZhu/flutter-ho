@@ -168,7 +168,9 @@ class Item2 extends StatelessWidget {
         children: [
           //标签部分
           Container(
-            child: TabBar(),
+            child: TabBar(
+              tabs: [],
+            ),
           ),
           Expanded(
             //基础部分

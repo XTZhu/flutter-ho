@@ -24,8 +24,6 @@ class DemoWillPopScope extends StatefulWidget {
 }
 
 class _DemoWillPopScopeState extends State<DemoWillPopScope> {
-
-
   //上一次点击事件
   int pretime = 0;
 
@@ -65,7 +63,7 @@ class _DemoWillPopScopeState extends State<DemoWillPopScope> {
   }
 
   void showTips() async {
-    bool flag = await showDialog<bool>(
+    bool? flag = await showDialog<bool>(
         context: context,
         builder: (BuildContext context) {
           return new AlertDialog(
@@ -85,8 +83,5 @@ class _DemoWillPopScopeState extends State<DemoWillPopScope> {
             ],
           );
         });
-    if (flag) {
-      //退出当前页面
-    }
   }
 }

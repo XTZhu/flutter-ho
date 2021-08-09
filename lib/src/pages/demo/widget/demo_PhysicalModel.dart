@@ -22,7 +22,6 @@ class DemoPhysicalModel extends StatefulWidget {
 }
 
 class _DemoPhysicalModelState extends State<DemoPhysicalModel> {
-
   int _currentIndex = 0;
   Color _shadowColor = Colors.deepPurple;
 
@@ -34,41 +33,28 @@ class _DemoPhysicalModelState extends State<DemoPhysicalModel> {
       ),
       backgroundColor: Colors.white,
       body: Center(
-        child: AnimatedPhysicalModel(
-          //阴影的圆角
-          borderRadius: BorderRadius.all(Radius.circular(10)),
-          //阴影形状 默认矩形
-          shape: BoxShape.rectangle,
-          //背景颜色
-          color: Colors.deepPurple,
-          //阴影颜色
-          shadowColor: _shadowColor,
-          //阴影高度 默认为0
-          elevation: 20.0,
-          //动态切换的时间
-          duration: Duration(milliseconds: 600),
-          child: Container(
-            width: 200,
-            height: 200,
-            color: Colors.white,
-          ),
-        ),
+        child: buildAnimatedPhysicalModel(),
       ),
-      floatingActionButton: FloatingActionButton(child: Icon(Icons.add),onPressed: (){
-        _currentIndex++;
-        int flag = _currentIndex % 3;
+    );
+  }
 
-        if(flag==0){
-          _shadowColor = Colors.blue;
-        }else if(flag==1){
-          _shadowColor = Colors.red;
-        }else{
-          _shadowColor = Colors.deepOrange;
-        }
-        setState(() {
-
-        });
-      },),
+  AnimatedPhysicalModel buildAnimatedPhysicalModel() {
+    return AnimatedPhysicalModel(
+      //阴影的圆角
+      borderRadius: BorderRadius.all(Radius.circular(0)),
+      //阴影形状 默认矩形
+      shape: BoxShape.rectangle,
+      //背景颜色
+      color: Colors.transparent,
+      animateColor: true,
+      //阴影颜色
+      shadowColor: _shadowColor,
+      animateShadowColor: true,
+      //阴影高度 默认为0
+      elevation: 1.0,
+      //动态切换的时间
+      duration: Duration(milliseconds: 1200),
+      child: Text("早起的年轻人"),
     );
   }
 

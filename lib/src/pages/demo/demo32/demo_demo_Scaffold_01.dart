@@ -34,9 +34,15 @@ class _DemoScaffold01PageState extends State<DemoScaffold01Page> {
   @override
   Widget build(BuildContext context) {
     if (_globalKey.currentContext != null) {
-      RenderBox _renderBox = _globalKey.currentContext.findRenderObject();
-      Offset centerRightOffset = _renderBox.paintBounds.bottomLeft;
-      print("centerRightOffset $centerRightOffset");
+      BuildContext? ctx = _globalKey.currentContext;
+      if (ctx != null) {
+        RenderObject? renderObject = ctx.findRenderObject();
+        if (renderObject != null) {
+          RenderObject _renderBox = renderObject;
+          Offset centerRightOffset = _renderBox.paintBounds.bottomLeft;
+          print("centerRightOffset $centerRightOffset");
+        }
+      }
     }
 
     ///使用 Scaffold 组件来构建应用的基本页面

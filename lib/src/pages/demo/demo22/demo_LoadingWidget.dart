@@ -50,7 +50,7 @@ class _DemoLoadingWidgetPageState extends State<DemoLoadingWidgetPage> {
 class LoadingWidget extends StatefulWidget {
   final String title;
 
-  const LoadingWidget({Key key, this.title}) : super(key: key);
+  const LoadingWidget({Key? key, required this.title}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() {
@@ -61,7 +61,7 @@ class LoadingWidget extends StatefulWidget {
 class _LoadingWidgetState extends State<LoadingWidget> {
   int _index = 1;
   String _loadingTitle = "";
-  Timer _timer;
+  Timer? _timer;
 
   @override
   void initState() {
@@ -88,8 +88,8 @@ class _LoadingWidgetState extends State<LoadingWidget> {
   }
 
   void stopTimer() {
-    if (_timer != null && _timer.isActive) {
-      _timer.cancel();
+    if (_timer != null && _timer!.isActive) {
+      _timer!.cancel();
       _timer = null;
     }
   }

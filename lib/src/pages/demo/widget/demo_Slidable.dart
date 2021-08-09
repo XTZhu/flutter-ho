@@ -184,7 +184,7 @@ class _DemoSlidableState extends State<DemoSlidable> {
   }
 
   Widget test() {
-    ListView(
+    return ListView(
       children: <Widget>[
         Slidable(
           //滑动方式

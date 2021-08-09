@@ -35,13 +35,18 @@ Future<bool> checkAppVersion(BuildContext context,
     return ResponseInfo(data: {
       "isNeed": true,
       "updateContent": "优化了一些BUG，程序员们正在努力中",
-      "packageUrl": "http://pic.studyyoun.com/96b282d9-f82c-46fb-8767-754bd6288775.apk"
+      "packageUrl":
+          "http://pic.studyyoun.com/96b282d9-f82c-46fb-8767-754bd6288775.apk"
     });
   });
   if (responseInfo.success) {
-    Map element = responseInfo.data;
+    Map? element = responseInfo.data;
+    AppVersionBean? appVersionBean;
+    if (element is Map<String, dynamic>) {
+      Map<String, dynamic> map = element;
+      appVersionBean = AppVersionBean.fromJson(map);
+    }
 
-    AppVersionBean appVersionBean = AppVersionBean.fromJson(element);
     if (appVersionBean != null) {
       if (appVersionBean.isNeed) {
         showAppUpgradeDialog(
@@ -69,7 +74,7 @@ Future<bool> checkAppVersion(BuildContext context,
 /// lib/app/page/common/app_upgrade.dart
 ///便捷显示升级弹框
 void showAppUpgradeDialog({
-  @required BuildContext context,
+  required BuildContext context,
   //是否强制升级
   bool isForce = false,
   //点击背景是否消失
@@ -106,7 +111,7 @@ class AppUpgradePage extends StatefulWidget {
   AppUpgradePage(
       {this.isForce = false,
       this.upgradText = "",
-      this.apkUrl,
+      this.apkUrl = "",
       this.isBackDismiss = false});
 
   @override
@@ -255,7 +260,7 @@ class _AppUpgradeState extends State<AppUpgradePage> {
             height: 50,
             child: Text(
               //不同状态显示不同的文本内容
-              buildButtonText(snapshot.data),
+              buildButtonText(snapshot.data!),
               style: TextStyle(fontSize: 16, color: Colors.white),
             ),
           ),
@@ -299,9 +304,9 @@ class _AppUpgradeState extends State<AppUpgradePage> {
     //最好是有一个再次点击时间控制
     //笔者这里省略
     //如果正在下载中 取消网络请求
-    if (_cancelToken != null && !_cancelToken.isCancelled) {
+    if (_cancelToken != null && !_cancelToken!.isCancelled) {
       //取消下载
-      _cancelToken.cancel();
+      _cancelToken!.cancel();
     }
     //如果是强制升级 点击物理返回键退出应用程序
     if (widget.isForce) {
@@ -317,9 +322,9 @@ class _AppUpgradeState extends State<AppUpgradePage> {
   InstallStatues _installStatues = InstallStatues.none;
 
   //apk保存的路径
-  String appLocalPath;
+  String? appLocalPath;
 
-  CancelToken _cancelToken;
+  CancelToken? _cancelToken;
 
   ///使用dio 下载文件
   void downApkFunction() async {
@@ -377,7 +382,7 @@ class _AppUpgradeState extends State<AppUpgradePage> {
     final directory = Theme.of(context).platform == TargetPlatform.android
         ? await getExternalStorageDirectory()
         : await getApplicationDocumentsDirectory();
-    return directory.path;
+    return directory!.path;
   }
 
   void installApkFunction() async {
@@ -385,8 +390,7 @@ class _AppUpgradeState extends State<AppUpgradePage> {
     PackageInfo packageInfo = await PackageInfo.fromPlatform();
     String packageName = packageInfo.packageName;
     //开始安装
-    InstallPluginCustom.installApk(appLocalPath, packageName)
-        .then((result) {
+    InstallPluginCustom.installApk(appLocalPath, packageName).then((result) {
       print('install apk $result');
     }).catchError((error) {
       //安装失败

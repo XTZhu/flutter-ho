@@ -21,7 +21,7 @@ class BannerWidget extends StatefulWidget {
 
   BannerWidget({
     //必传参数
-    @required this.imageList,
+    required this.imageList,
     //轮播时间
     this.loopDuration = const Duration(seconds: 3),
   });
@@ -36,8 +36,8 @@ class _BannerWidgetState extends State<BannerWidget> {
   //当前显示的页数
   int _current = 1;
   //计时器
-  Timer _timer;
-  PageController _pageController;
+  Timer? _timer;
+  late PageController _pageController;
 
   @override
   void initState() {
@@ -52,7 +52,9 @@ class _BannerWidgetState extends State<BannerWidget> {
 
   @override
   void dispose() {
-    _timer.cancel();
+    if (_timer != null && _timer!.isActive) {
+      _timer!.cancel();
+    }
     super.dispose();
   }
 
@@ -100,8 +102,8 @@ class _BannerWidgetState extends State<BannerWidget> {
 
   //定义停止轮播的方法
   void stopLoopFunction() {
-    if (_timer.isActive) {
-      _timer.cancel();
+    if (_timer != null && _timer!.isActive) {
+      _timer!.cancel();
     }
   }
 
@@ -146,7 +148,7 @@ class _BannerWidgetState extends State<BannerWidget> {
       width: 50,
       height: 24,
       decoration: BoxDecoration(
-          color: Colors.grey[200].withOpacity(0.5),
+          color: Colors.grey[200]!.withOpacity(0.5),
           //设置圆角
           borderRadius: BorderRadius.all(Radius.circular(12))),
       child: Text(

@@ -1,6 +1,3 @@
-
-
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -52,7 +49,7 @@ class _DemoPiePageState extends State<DemoVideoListPage> {
 class ListItemWidget extends StatefulWidget {
   final int index;
 
-  const ListItemWidget({Key key, this.index}) : super(key: key);
+  const ListItemWidget({Key? key, required this.index}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() {
@@ -72,7 +69,9 @@ class _ListItemWidgetState extends State<ListItemWidget> {
           Expanded(
             child: buildItemCell(),
           ),
-          SizedBox(width: 6,),
+          SizedBox(
+            width: 6,
+          ),
           Expanded(
             child: buildItemCell(),
           ),

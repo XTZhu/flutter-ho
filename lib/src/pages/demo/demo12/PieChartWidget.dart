@@ -1,5 +1,3 @@
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'dart:math';
 import 'dart:ui' as ui;
 import 'dart:ui';
@@ -9,14 +7,13 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_ho/src/utils/number_utils.dart';
 
-
 /// 创建人： Created by zhaolong
 /// 创建时间：Created by  on 3/26/21.
 ///
 /// 可关注公众号：我的大前端生涯   获取最新技术分享
 /// 可关注网易云课堂：https://study.163.com/instructor/1021406098.htm
 /// 可关注博客：https://blog.csdn.net/zl18603543572
-/// 
+///
 /// 代码清单
 main() {
   runApp(MaterialApp(
@@ -32,17 +29,24 @@ class TestPage extends StatefulWidget {
 }
 
 class _TestPageState extends State<TestPage> {
-  List<double> angles;
+  late List<double> angles;
 
-  List<Color> colors;
-  List<String> contents;
+  late List<Color> colors;
+  late List<String> contents;
   @override
   void initState() {
     super.initState();
-    colors=[Colors.red,Colors.cyan,Colors.black,Colors.yellow,Colors.grey];
-    angles=[1/7,2/7,2/7,1/14,3/14];
-    contents=["梁朝伟","刘德华","郭富城","周星驰","张学友"];
+    colors = [
+      Colors.red,
+      Colors.cyan,
+      Colors.black,
+      Colors.yellow,
+      Colors.grey
+    ];
+    angles = [1 / 7, 2 / 7, 2 / 7, 1 / 14, 3 / 14];
+    contents = ["梁朝伟", "刘德华", "郭富城", "周星驰", "张学友"];
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -57,35 +61,32 @@ class _TestPageState extends State<TestPage> {
           height: double.infinity,
           child: Column(
             children: [
-              PieChartWidget(angles,colors,startTurns:.0,radius: 130,contents: contents)
+              PieChartWidget(angles, colors,
+                  startTurns: .0, radius: 130, contents: contents)
             ],
           )),
     );
   }
-
 }
-
-
-
 
 class PieChartWidget extends StatefulWidget {
   ///比例集合
-  @required
+
   List<double> proportions;
 
   ///文案集合
-  @required
+
   List<String> contents;
 
   ///颜色集合
-  @required
+
   List<Color> colors;
 
   double startTurns = .0;
   double radius = 130;
 
   PieChartWidget(this.proportions, this.colors,
-      {this.contents, this.radius, this.startTurns});
+      {required this.contents, required this.radius, required this.startTurns});
 
   @override
   _PieChartWidgetState createState() => _PieChartWidgetState();
@@ -94,9 +95,9 @@ class PieChartWidget extends StatefulWidget {
 class _PieChartWidgetState extends State<PieChartWidget>
     with TickerProviderStateMixin {
   ///这个是 自动
-  AnimationController autoAnimationController;
+  late AnimationController autoAnimationController;
 
-  Animation<double> tween;
+  late Animation<double> tween;
 
   double turns = .0;
 
@@ -105,22 +106,22 @@ class _PieChartWidgetState extends State<PieChartWidget>
   ///角加速度，类似摩擦力 的作用 ，让惯性滚动 减慢，这个意思是每一秒 ，角速度 减慢vA个pi。
   double vA = 40.0;
 
-  Offset offset;
+  late Offset offset;
 
-  double pBy;
+  late double pBy;
 
-  double pBx;
+  late double pBx;
 
-  double pAx;
+  late double pAx;
 
-  double pAy;
+  late double pAy;
 
-  double mCenterX;
-  double mCenterY;
+  late double mCenterX;
+  late double mCenterY;
 
-  Animation<double> _valueTween;
+  late Animation<double> _valueTween;
 
-  double animalValue;
+  late double animalValue;
 
   @override
   void initState() {
@@ -166,7 +167,7 @@ class _PieChartWidgetState extends State<PieChartWidget>
   void _onPanDown(DragDownDetails details) {
     if (offset == null) {
       //获取position
-      RenderBox box = _key.currentContext.findRenderObject();
+      RenderBox box = _key.currentContext!.findRenderObject() as RenderBox;
       offset = box.localToGlobal(Offset.zero);
       mCenterX = offset.dx + 130;
       mCenterY = offset.dy + 130;
@@ -205,8 +206,8 @@ class _PieChartWidgetState extends State<PieChartWidget>
     }
 
     double cosAOC = (aoDistance * aoDistance +
-        ocdistance * ocdistance -
-        acDistance * acDistance) /
+            ocdistance * ocdistance -
+            acDistance * acDistance) /
         (2 * aoDistance * ocdistance);
     double AOC = c * acos(cosAOC);
 
@@ -225,8 +226,8 @@ class _PieChartWidgetState extends State<PieChartWidget>
 
     ///计算 cos boc 的值，然后拿到角 boc；
     double cosBOC = (boDistance * boDistance +
-        ocdistance * ocdistance -
-        bcDistance * bcDistance) /
+            ocdistance * ocdistance -
+            bcDistance * bcDistance) /
         (2 * boDistance * ocdistance);
     double BOC = c * acos(cosBOC);
 
@@ -249,7 +250,7 @@ class _PieChartWidgetState extends State<PieChartWidget>
     int quadrant = RadianUtils.getQuadrant(pBx - mCenterX, pBy - mCenterY);
     //到中心点距离
     double distance =
-    RadianUtils.distanceForTwoPoint(mCenterX, mCenterY, pBx, pBy);
+        RadianUtils.distanceForTwoPoint(mCenterX, mCenterY, pBx, pBy);
     //获取惯性绘制的初始角度
     double inertiaInitAngle = RadianUtils.calculateAngleFromVelocity(
         velocityX, velocityY, levelAngle, quadrant, distance);
@@ -261,11 +262,11 @@ class _PieChartWidgetState extends State<PieChartWidget>
       double t = inertiaInitAngle.abs() / vA;
       double s = t * inertiaInitAngle / 2;
 
-
-
       animalValue = turns;
       var time = new DateTime.now();
-      int direction = 1; ///方向控制参数
+      int direction = 1;
+
+      ///方向控制参数
       if (inertiaInitAngle < 0) {
         direction = -1;
       }

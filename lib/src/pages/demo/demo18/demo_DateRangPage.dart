@@ -24,7 +24,7 @@ class DemoPhoneWidget extends StatefulWidget {
 }
 
 class _DemoPhoneWidgetState extends State<DemoPhoneWidget> {
-  String _dateSelectText;
+  late String _dateSelectText;
 
   @override
   Widget build(BuildContext context) {
@@ -57,7 +57,8 @@ class PhoneWidget extends StatefulWidget {
   //显示使用的小电话
   final String phone;
 
-  const PhoneWidget({Key key, this.clickAction, this.phone}) : super(key: key);
+  const PhoneWidget({Key? key, required this.clickAction, required this.phone})
+      : super(key: key);
 
   @override
   State<StatefulWidget> createState() {

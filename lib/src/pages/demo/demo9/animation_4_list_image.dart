@@ -36,7 +36,11 @@ class _DragImageAnimationPageState extends State {
         title: Text("图片"),
       ),
       body: DragWidget(
-        child: Image.asset("assets/images/banner1.png",width: 100,height: 100,),
+        child: Image.asset(
+          "assets/images/banner1.png",
+          width: 100,
+          height: 100,
+        ),
       ),
     );
   }
@@ -45,7 +49,7 @@ class _DragImageAnimationPageState extends State {
 class DragWidget extends StatefulWidget {
   final Widget child;
 
-  const DragWidget({Key key, this.child}) : super(key: key);
+  const DragWidget({Key? key, required this.child}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() {
@@ -59,9 +63,9 @@ class _DragWidgetState extends State<DragWidget>
   Alignment _dragAlignment = Alignment(0, 0);
 
   //动画控制器
-  AnimationController _animationController;
+  late AnimationController _animationController;
 
-  Animation<Alignment> _animation;
+  late Animation<Alignment> _animation;
 
   @override
   void initState() {
@@ -71,9 +75,7 @@ class _DragWidgetState extends State<DragWidget>
     //添加一个动画兼听
     _animationController.addListener(() {
       _dragAlignment = _animation.value;
-      setState(() {
-
-      });
+      setState(() {});
     });
   }
 
@@ -121,9 +123,9 @@ class _DragWidgetState extends State<DragWidget>
     SpringSimulation springSimulation = SpringSimulation(
       //弹簧的属性配置
       SpringDescription(
-        mass: 10,//质量
-        stiffness: 1000,//硬度
-        damping: 0.75,//阻尼系数
+        mass: 10, //质量
+        stiffness: 1000, //硬度
+        damping: 0.75, //阻尼系数
       ),
       0,
       1,

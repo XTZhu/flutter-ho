@@ -132,12 +132,12 @@ class _DemoListViewFlagPageState extends State<DemoListViewFlagPage> {
         (BuildContext context, int index) {
           MonthStatBean bean = _list[index];
           //获取下一个数据
-          MonthStatBean nextBean;
+          MonthStatBean ? nextBean;
           if (index < _list.length - 1) {
             nextBean = _list[index + 1];
           }
 
-          MonthStatBean upBean;
+          MonthStatBean ? upBean;
           if (index > 0) {
             upBean = _list[index - 1];
           }
@@ -163,8 +163,9 @@ class _DemoListViewFlagPageState extends State<DemoListViewFlagPage> {
 
           //取出上一个数据
           MonthStatBean upBean = _list[_preIndex];
-          if(firstIndex==0||bean.time.substring(0,11)!=upBean.time.substring(0,11)){
-            _streamController.add(bean.time.substring(0,11));
+          if (firstIndex == 0 ||
+              bean.time.substring(0, 11) != upBean.time.substring(0, 11)) {
+            _streamController.add(bean.time.substring(0, 11));
           }
           // _streamController.add(bean.time.substring(0,11));
           _preIndex = firstIndex;
@@ -187,13 +188,13 @@ class Demo14ListItemWidget extends StatefulWidget {
   final MonthStatBean bean;
 
   //下一个显示的数据
-  final MonthStatBean nextBean;
+  final MonthStatBean? nextBean;
 
   //上一个显示的数据
-  final MonthStatBean upBean;
+  final MonthStatBean? upBean;
 
   const Demo14ListItemWidget(
-      {Key key, this.index, this.bean, this.nextBean, this.upBean})
+      {Key? key, required this.index, required this.bean, this.nextBean, this.upBean})
       : super(key: key);
 
   @override
@@ -206,17 +207,20 @@ class _Demo14ListItemWidgetState extends State<Demo14ListItemWidget> {
   @override
   Widget build(BuildContext context) {
     double bottom = 10;
-    String current = widget.bean.time.substring(0, 11);
-    if (widget.nextBean != null) {
-      //比较时间
-      String nextTime = widget.nextBean.time.substring(0, 11);
-      if (current == nextTime) {
-        bottom = 0.0;
+    String ?current;
+    if (widget.bean != null) {
+      current= widget.bean!.time.substring(0, 11);
+      if (widget.nextBean != null) {
+        //比较时间
+        String nextTime = widget.nextBean!.time.substring(0, 11);
+        if (current == nextTime) {
+          bottom = 0.0;
+        }
       }
     }
     bool isShowHeader = true;
     if (widget.upBean != null) {
-      String upTime = widget.upBean.time.substring(0, 11);
+      String upTime = widget.upBean!.time.substring(0, 11);
       if (current == upTime) {
         isShowHeader = false;
       }
@@ -241,7 +245,7 @@ class _Demo14ListItemWidgetState extends State<Demo14ListItemWidget> {
     );
   }
 
-  Widget buildHeader(bool isShowHeader, String current) {
+  Widget buildHeader(bool isShowHeader, String ?current) {
     if (!isShowHeader) {
       return Container();
     }
@@ -287,7 +291,7 @@ class _Demo14ListItemWidgetState extends State<Demo14ListItemWidget> {
             children: [
               //第一行文字
               Text(
-                " ${widget.bean.title}",
+                " ${widget.bean!.title}",
                 style: TextStyle(fontWeight: FontWeight.w600, fontSize: 16),
               ),
               SizedBox(
@@ -295,7 +299,7 @@ class _Demo14ListItemWidgetState extends State<Demo14ListItemWidget> {
               ),
               //第二行文字
               Text(
-                "${widget.bean.subTitle}",
+                "${widget.bean!.subTitle}",
                 style: TextStyle(fontWeight: FontWeight.w400, fontSize: 14),
               ),
               SizedBox(
@@ -303,7 +307,7 @@ class _Demo14ListItemWidgetState extends State<Demo14ListItemWidget> {
               ),
               //第三行文字
               Text(
-                "${widget.bean.time}",
+                "${widget.bean!.time}",
                 style: TextStyle(fontWeight: FontWeight.w400, fontSize: 14),
               )
             ],
@@ -320,11 +324,12 @@ class CustomScrollDelegate extends SliverChildBuilderDelegate {
   Function(int firstIndex, int lastIndex) scrollCallBack;
 
   //构造函数
-  CustomScrollDelegate(builder, {int itemCount, this.scrollCallBack})
+  CustomScrollDelegate(builder,
+      {required int itemCount, required this.scrollCallBack})
       : super(builder, childCount: itemCount);
 
   @override
-  double estimateMaxScrollOffset(int firstIndex, int lastIndex,
+  double? estimateMaxScrollOffset(int firstIndex, int lastIndex,
       double leadingScrollOffset, double trailingScrollOffset) {
     if (scrollCallBack != null) {
       scrollCallBack(firstIndex, lastIndex);
@@ -336,7 +341,7 @@ class CustomScrollDelegate extends SliverChildBuilderDelegate {
 
 ///定义 ListView的数据模型
 class MonthStatBean {
-  String time;
-  String title;
-  String subTitle;
+  late String time;
+  late String title;
+  late String subTitle;
 }

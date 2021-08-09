@@ -32,20 +32,29 @@ class _DemoBottomNavigationPageState extends State<DemoBottomNavigationPage> {
   int _currentIndex = 0;
 
   List<Widget> widgetList = [
-    DemoBottomNavigationItem(index: 0,),
-    DemoBottomNavigationItem(index: 1,),
-    DemoBottomNavigationItem(index: 2,),
+    DemoBottomNavigationItem(
+      index: 0,
+    ),
+    DemoBottomNavigationItem(
+      index: 1,
+    ),
+    DemoBottomNavigationItem(
+      index: 2,
+    ),
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body:widgetList[_currentIndex],
-      floatingActionButton: FloatingActionButton(child: Icon(Icons.add),onPressed:(){
-        setState(() {
-          _currentIndex = 1;
-        });
-      },),
+      body: widgetList[_currentIndex],
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.add),
+        onPressed: () {
+          setState(() {
+            _currentIndex = 1;
+          });
+        },
+      ),
       bottomNavigationBar: BottomNavigationBar(
         items: [
           BottomNavigationBarItem(
@@ -81,11 +90,13 @@ class _DemoBottomNavigationPageState extends State<DemoBottomNavigationPage> {
 class DemoBottomNavigationItem extends StatelessWidget {
   final int index;
 
-  const DemoBottomNavigationItem({Key key, this.index}) : super(key: key);
+  const DemoBottomNavigationItem({Key? key, required this.index})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(child: Text("$index"),);
+    return Container(
+      child: Text("$index"),
+    );
   }
-
 }

@@ -17,10 +17,10 @@ class NavigatorUtils {
   ///[targPage] 目标页面
   ///[isReplace] 是否替换当前页面  A -B
   static void pushPage({
-     BuildContext context,
-     Widget targPage,
+    required BuildContext context,
+    required Widget targPage,
     bool isReplace = false,
-     Function(dynamic value) dismissCallBack,
+    Function(dynamic value)? dismissCallBack,
   }) {
     PageRoute pageRoute;
 
@@ -55,12 +55,12 @@ class NavigatorUtils {
   ///[isReplace] 是否替换当前页面  A -B
   ///[opaque] 是否以背景透明的方式打开页面
   static void pushPageByFade({
-    @required BuildContext context,
-    @required Widget targPage,
+    required BuildContext context,
+    required Widget targPage,
     bool isReplace = false,
     int startMills = 400,
     bool opaque = false,
-    Function(dynamic value) dismissCallBack,
+    Function(dynamic value)? dismissCallBack,
   }) {
     PageRoute pageRoute = PageRouteBuilder(
       //背景透明 方式打开新的页面
@@ -99,31 +99,36 @@ class NavigatorUtils {
   /// 开源项目  Flutter-HO 早起的年轻人
   /// github https://github.com/zhaolongs/flutter-ho
   static void pushPageByCenterScale({
-    @required BuildContext context,
-    @required Widget targPage,
+    required BuildContext context,
+    required Widget targPage,
     bool isReplace = false,
     int startMills = 400,
-    int reversMills= 400,
+    int reversMills = 400,
     bool opaque = false,
-    Function(dynamic value) dismissCallBack,
+    Function(dynamic value)? dismissCallBack,
   }) {
-
-
     if (isReplace) {
-      Navigator.of(context).pushReplacement(_createRoute(context,targPage,startMills,reversMills)).then((value) {
+      Navigator.of(context)
+          .pushReplacement(
+              _createRoute(context, targPage, startMills, reversMills))
+          .then((value) {
         if (dismissCallBack != null) {
           dismissCallBack(value);
         }
       });
     } else {
-      Navigator.of(context).push(_createRoute(context,targPage,startMills,reversMills)).then((value) {
+      Navigator.of(context)
+          .push(_createRoute(context, targPage, startMills, reversMills))
+          .then((value) {
         if (dismissCallBack != null) {
           dismissCallBack(value);
         }
       });
     }
   }
-  static Route _createRoute(BuildContext parentContext, Widget targPage, int startMills, int reversMills) {
+
+  static Route _createRoute(BuildContext parentContext, Widget targPage,
+      int startMills, int reversMills) {
     return PageRouteBuilder<void>(
       pageBuilder: (context, animation, secondaryAnimation) {
         return targPage;
@@ -143,6 +148,7 @@ class NavigatorUtils {
       },
     );
   }
+
   static Tween<RelativeRect> _createTween(BuildContext context) {
     var windowSize = MediaQuery.of(context).size;
     var box = context.findRenderObject() as RenderBox;

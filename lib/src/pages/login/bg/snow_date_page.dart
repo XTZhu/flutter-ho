@@ -51,7 +51,7 @@ class _SnowWidgetState extends State<SnowWidget> with TickerProviderStateMixin {
   Random _random = new Random(DateTime.now().microsecondsSinceEpoch);
 
   //来个动画控制器
-  AnimationController _animationController;
+  late AnimationController _animationController;
 
   //初始化函数中创建气泡
   @override
@@ -126,7 +126,6 @@ class _SnowWidgetState extends State<SnowWidget> with TickerProviderStateMixin {
       ),
     );
   }
-
 }
 
 ///创建画布
@@ -134,10 +133,11 @@ class SnowCustomMyPainter extends CustomPainter {
   List<BobbleBean> list;
   Random random;
 
-  SnowCustomMyPainter({this.list, this.random});
+  SnowCustomMyPainter({required this.list, required this.random});
 
   //先来个画笔
   Paint _paint = new Paint()..isAntiAlias = true;
+
   //具体的绘制功能
   @override
   void paint(Canvas canvas, Size size) {
@@ -154,7 +154,6 @@ class SnowCustomMyPainter extends CustomPainter {
       if (element.postion.dy > size.height) {
         element.postion = element.origin;
       }
-
     });
     //
     // //绘制
@@ -177,13 +176,17 @@ class SnowCustomMyPainter extends CustomPainter {
 ///气泡模型 基本属性信息
 class BobbleBean {
   //位置
-  Offset postion;
+  late Offset postion;
+
   //初始位置
-  Offset origin;
+  late Offset origin;
+
   //颜色
-  Color color;
+  late Color color;
+
   //运动的速度
-  double speed;
+  late double speed;
+
   //半径
-  double radius;
+  late double radius;
 }

@@ -16,7 +16,7 @@ import 'package:flutter_ho/src/utils/navigator_utils.dart';
 class ImageScanWidget extends StatefulWidget {
   final List<String> imageList;
 
-  const ImageScanWidget({Key key, this.imageList}) : super(key: key);
+  const ImageScanWidget({Key? key, required this.imageList}) : super(key: key);
 
   @override
   _ImageScanWidgetState createState() => _ImageScanWidgetState();

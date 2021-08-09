@@ -99,7 +99,7 @@ class _IndexPageState extends State with ProtocolModel {
     //初始化
     await SPUtil.init();
     //读取一下标识
-    bool isAgrement = await SPUtil.getBool("isAgrement");
+    bool? isAgrement = await SPUtil.getBool("isAgrement");
 
     LogUtils.e("isAgrement $isAgrement");
 
@@ -128,20 +128,18 @@ class _IndexPageState extends State with ProtocolModel {
   }
 
   void next() async {
-
     //判断是否第一次安装应用
-    bool isFirstInstall = await  SPUtil.getBool("flutter_ho_isFirst");
+    bool? isFirstInstall = await SPUtil.getBool("flutter_ho_isFirst");
 
-    if(isFirstInstall==null){
+    if (isFirstInstall == null) {
       //如果为null 则是第一次安装应用
       //引导 页面
       NavigatorUtils.pushPageByFade(
           context: context, targPage: FirstGuildPage(), isReplace: true);
-    }else{
+    } else {
       //倒计时页面
       NavigatorUtils.pushPageByFade(
           context: context, targPage: WelcomePage(), isReplace: true);
     }
-
   }
 }

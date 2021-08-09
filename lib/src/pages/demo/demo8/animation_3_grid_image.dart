@@ -95,7 +95,7 @@ class GridViewItemWidget extends StatelessWidget {
 class ScendPage extends StatelessWidget {
   final String path;
 
-  const ScendPage({Key key, this.path}) : super(key: key);
+  const ScendPage({Key? key, required this.path}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

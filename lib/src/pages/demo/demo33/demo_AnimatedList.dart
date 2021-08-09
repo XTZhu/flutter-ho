@@ -16,65 +16,129 @@ main() {
     //不显示 debug标签
     debugShowCheckedModeBanner: false,
     //显示的首页面
-    home: DemoAnimatedContainer(),
+    home: DemoAnimatedList(),
   ));
 }
 
 ///代码清单
-class DemoAnimatedContainer extends StatefulWidget {
+class DemoAnimatedList extends StatefulWidget {
   @override
-  _DemoAnimatedContainerState createState() => _DemoAnimatedContainerState();
+  _DemoAnimatedListState createState() => _DemoAnimatedListState();
 }
 
-class _DemoAnimatedContainerState extends State<DemoAnimatedContainer> {
+class _DemoAnimatedListState extends State<DemoAnimatedList> {
+  List<String> _list = [];
+
+  GlobalKey<AnimatedListState> _globalKey = new GlobalKey();
+
+  @override
+  void initState() {
+    super.initState();
+    for (int i = 0; i < 10; i++) {
+      _list.add("早起的年轻人 $i");
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("AnimatedContainer")),
-      body: Center(
-        child: AnimatedContainer(
-          //动画速率
-          curve: Curves.easeInBack,
-          //动画执行结束的回调
-          onEnd: () {},
-          //子Widget 对齐方式
-          alignment: Alignment.center,
-          width: 300,
-          //高度
-          height: 200,
-          //背景颜色
-          // color: Colors.deepPurple,
-          //内边距
-          padding: EdgeInsets.all(0),
-          //复杂装饰样式
-          decoration: BoxDecoration(
-            //背景色
-            color: Colors.red,
-            //边框圆角
-            borderRadius: BorderRadius.all(Radius.circular(20)),
-            //边框
-            border: Border.all(color: Colors.deepPurple, width: 1),
-            //线性渐变
-            gradient: LinearGradient(
-                //开始位置
-                begin: Alignment(0, 0),
-                //结束位置
-                end: Alignment(1, 0),
-                //颜色组
-                colors: [
-                  Colors.blue,
-                  Colors.deepOrange,
-                  Colors.orange,
-                ]),
+      appBar: AppBar(title: Text("AnimatedList")),
+      body: Column(
+        children: [
+          Expanded(
+            child: buildAnimatedList(),
           ),
+          Container(
+            height: 80,
+            margin: EdgeInsets.only(bottom: 80),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                TextButton(
+                    onPressed: () {
+                      //插入源数据
+                      _list.insert(0, "插入数据 ${DateTime.now()}");
+                      //插入动画效果
+                      _globalKey.currentState!.insertItem(
+                        0, //插入的位置
+                        duration: Duration(milliseconds: 400),
+                      );
+                    },
+                    child: Text("插入")),
+                SizedBox(
+                  width: 22,
+                ),
+                TextButton(
+                    onPressed: () {
+                      //移除源数据
+                      _list.removeAt(0);
+                      //移除动画效果
+                      _globalKey.currentState!.removeItem(
+                        0,
+                        (BuildContext context, Animation<double> animation) {
+                          return buildSizeTransition(animation, 0);
+                        },
+                      );
+                    },
+                    child: Text("删除")),
+              ],
+            ),
+          )
+        ],
+      ),
+    );
+  }
 
-          duration: Duration(seconds: 2),
-          child: Text(
-            "早起的年轻人",
-            style: TextStyle(color: Colors.white),
+  AnimatedList buildAnimatedList() {
+    return AnimatedList(
+      //关键key
+      key: _globalKey,
+      //列表个数
+      initialItemCount: _list.length,
+      //每个子Item
+      itemBuilder:
+          (BuildContext context, int index, Animation<double> animation) {
+        return buildSizeTransition(animation, index);
+      },
+    );
+  }
+
+  SizeTransition buildSizeTransition(Animation<double> animation, int index) {
+    //来个动画
+    return SizeTransition(
+      //动画构建
+      sizeFactor: animation,
+      //子UI
+      child: SizedBox(
+        height: 80.0,
+        child: Card(
+          color: Colors.primaries[index % Colors.primaries.length],
+          child: Center(
+            child: Text(
+              'Item $index ${_list[index]}',
+            ),
           ),
         ),
       ),
+    );
+  }
+
+  ListView buildListView() {
+    return ListView.builder(
+      itemCount: _list.length,
+      itemBuilder: (BuildContext context, int index) {
+        return SizedBox(
+          height: 80.0,
+          child: Card(
+            color: Colors.primaries[index % Colors.primaries.length],
+            child: Center(
+              child: Text(
+                'Item $index ${_list[index]}',
+              ),
+            ),
+          ),
+        );
+      },
     );
   }
 }

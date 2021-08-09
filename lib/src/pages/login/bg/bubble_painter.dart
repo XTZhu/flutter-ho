@@ -5,15 +5,14 @@ import 'package:flutter/material.dart';
 
 import 'bubble_bean.dart';
 
-
 /// 创建人： Created by zhaolong
 /// 创建时间：Created by  on 2020/12/4.
 ///
 /// 可关注公众号：我的大前端生涯   获取最新技术分享
 /// 可关注网易云课堂：https://study.163.com/instructor/1021406098.htm
 /// 可关注博客：https://blog.csdn.net/zl18603543572
-/// 
-/// 代码清单 
+///
+/// 代码清单
 ///绘制气泡的画布
 ///lib/src/page/login/bg/bubble_painter.dart
 class CustomMyPainter extends CustomPainter {
@@ -23,7 +22,8 @@ class CustomMyPainter extends CustomPainter {
   List<BobbleBean> list;
   //随机数变量
   Random random;
-  CustomMyPainter({this.list, this.random});
+  CustomMyPainter({required this.list, required this.random});
+
   ///计算坐标
   Offset calculateXY(double speed, double theta) {
     return Offset(speed * cos(theta), speed * sin(theta));

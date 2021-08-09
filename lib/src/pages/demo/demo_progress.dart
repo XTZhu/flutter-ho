@@ -26,7 +26,7 @@ class DemoProgerssPage extends StatefulWidget {
 
 class _DemoPiePageState extends State<DemoProgerssPage>
     with SingleTickerProviderStateMixin {
-  AnimationController _animationController;
+  late AnimationController _animationController;
 
   @override
   void initState() {
@@ -61,10 +61,10 @@ class _DemoPiePageState extends State<DemoProgerssPage>
       floatingActionButton: FloatingActionButton(
         child: Text("开始"),
         onPressed: () {
-          if(_animationController.isCompleted){
+          if (_animationController.isCompleted) {
             //如果动画执行完毕了 就反向执行
             _animationController.reverse();
-          }else{
+          } else {
             //重置动画
             _animationController.reset();
             //正向执行

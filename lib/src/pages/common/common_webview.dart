@@ -15,7 +15,7 @@ class CommonWebViewPage extends StatefulWidget {
   final String htmlUrl;
   final String pageTitle;
 
-  CommonWebViewPage({@required this.htmlUrl, this.pageTitle = ""});
+  CommonWebViewPage({required this.htmlUrl, this.pageTitle = ""});
 
   @override
   _CommonWebViewPageState createState() => _CommonWebViewPageState();

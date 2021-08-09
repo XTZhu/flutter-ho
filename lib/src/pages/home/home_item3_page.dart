@@ -100,7 +100,7 @@ class _HomeItem3PageState extends State<HomeItem3Page> {
   }
 
   ///异步加载
-  void loadingNetData() async {
+  Future<void> loadingNetData() async {
     /*
     {
     "code": 200,
@@ -165,6 +165,7 @@ class _HomeItem3PageState extends State<HomeItem3Page> {
     } else {
       ToastUtils.showToast("请求失败");
     }
+    return;
   }
 
   int _preLoadingTime = 0;

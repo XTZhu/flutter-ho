@@ -11,17 +11,22 @@ import 'package:flutter_ho/src/bean/bean_user.dart';
 ///代码清单
 class ArtBean {
   //文章标题
-  String artTitle;
+  String? artTitle;
+
   //文章简介
-  String artInfo;
+  String? artInfo;
+
   //喜欢个数
-  int likeCount;
+  int? likeCount;
+
   //评论个数
-  int pariseCount;
+  int? pariseCount;
+
   //用户数据
-  UserBean userBean;
+  UserBean? userBean;
+
   //创建时间
-  String createTime;
+  String? createTime;
 
   ///常用用于解析JSON数据
   ArtBean.fromMap(Map<String, dynamic> map) {
@@ -37,5 +42,4 @@ class ArtBean {
       userBean = UserBean.fromMap(bean);
     }
   }
-
 }

@@ -10,7 +10,7 @@ class DateSelectDayWidget extends StatefulWidget {
   final String unit;
 
   const DateSelectDayWidget(
-      {Key key, this.start = 2020, this.end = 2120, this.unit = ""})
+      {Key? key, this.start = 2020, this.end = 2120, this.unit = ""})
       : super(key: key);
 
   @override

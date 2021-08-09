@@ -32,7 +32,7 @@ class _HomeItemPageState extends State<HomeItemPage> {
       StreamController.broadcast();
 
   //当前播放视频的控制器
-  VideoPlayerController _videoPlayerController;
+  late VideoPlayerController _videoPlayerController;
 
   @override
   void initState() {
@@ -92,12 +92,12 @@ class _HomeItemPageState extends State<HomeItemPage> {
   }
 
   Widget buildListItemFungion() {
-    if(widget.flag==1){
+    if (widget.flag == 1) {
       return ListViewItemWidget(
         isScroll: _isScroll,
         streamController: _streamController,
       );
-    }else{
+    } else {
       return ListViewItem2Widget(
         isScroll: _isScroll,
         streamController: _streamController,

@@ -5,7 +5,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class SPUtil {
   ///静态实例
-  static SharedPreferences _sharedPreferences;
+  static late SharedPreferences _sharedPreferences;
 
   ///应用启动时需要调用
   ///初始化
@@ -37,19 +37,19 @@ class SPUtil {
   }
 
   // 异步读取
-  static Future<String> getString(String key) async {
+  static Future<String?> getString(String key) async {
     return _sharedPreferences.getString(key);
   }
 
-  static Future<int> getInt(String key) async {
+  static Future<int?> getInt(String key) async {
     return _sharedPreferences.getInt(key);
   }
 
-  static Future<bool> getBool(String key) async {
+  static Future<bool?> getBool(String key) async {
     return _sharedPreferences.getBool(key);
   }
 
-  static Future<double> getDouble(String key) async {
+  static Future<double?> getDouble(String key) async {
     return _sharedPreferences.getDouble(key);
   }
 
@@ -61,25 +61,28 @@ class SPUtil {
 
   ///获取自定义对象
   ///返回的是 Map<String,dynamic> 类型数据
-  static dynamic getObject(String key) {
-    String _data = _sharedPreferences.getString(key);
+  static dynamic? getObject(String key) {
+    String? _data = _sharedPreferences.getString(key);
+    if (_data == null) {
+      return null;
+    }
     return (_data.isEmpty) ? null : json.decode(_data);
   }
 
   ///保存列表数据
   static Future<bool> putObjectList(String key, List<Object> list) {
     ///将Object的数据类型转换为String类型
-    List<String> _dataList = list?.map((value) {
+    List<String>? _dataList = list?.map((value) {
       return json.encode(value);
     })?.toList();
-    return _sharedPreferences.setStringList(key, _dataList);
+    return _sharedPreferences.setStringList(key, _dataList!);
   }
 
   ///获取对象集合数据
   ///返回的是List<Map<String,dynamic>>类型
-  static List<Map> getObjectList(String key) {
+  static List<Map>? getObjectList(String key) {
     if (_sharedPreferences == null) return null;
-    List<String> dataLis = _sharedPreferences.getStringList(key);
+    List<String>? dataLis = _sharedPreferences.getStringList(key);
     return dataLis?.map((value) {
       Map _dataMap = json.decode(value);
       return _dataMap;

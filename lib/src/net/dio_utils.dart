@@ -2,8 +2,6 @@ import 'dart:io';
 
 import 'package:dio/adapter.dart';
 import 'package:dio/dio.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:package_info/package_info.dart';
 
 import 'log_interceptor.dart';
@@ -20,16 +18,20 @@ export 'http_helper.dart';
 /// 代码清单
 ///代码清单
 class DioUtils {
-  Dio _dio;
+  late Dio _dio;
+
   // 工厂模式
   factory DioUtils() => _getInstance();
+
   static DioUtils get instance => _getInstance();
-  static DioUtils _instance;
+  static DioUtils? _instance;
 
   //配置代理标识 false 不配置
   bool isProxy = false;
+
   //网络代理地址
   String proxyIp = "192.168.0.107";
+
   //网络代理端口
   String proxyPort = "8888";
 
@@ -53,7 +55,7 @@ class DioUtils {
     if (_instance == null) {
       _instance = new DioUtils._internal();
     }
-    return _instance;
+    return _instance!;
   }
 
   void debugFunction() {
@@ -81,19 +83,19 @@ class DioUtils {
     };
   }
 
-
   /// get 请求
   ///[url]请求链接
   ///[queryParameters]请求参数
   ///[cancelTag] 取消网络请求的标识
-  Future<ResponseInfo> getRequest(
-      {@required String url,
-      Map<String, dynamic> queryParameters,
-      CancelToken cancelTag}) async {
+  Future<ResponseInfo> getRequest({
+    required String url,
+    Map<String, dynamic>? queryParameters,
+    CancelToken? cancelTag,
+  }) async {
     //发起get请求
     try {
       _dio.options = await buildOptions(_dio.options);
-      _dio.options.headers["content-type"]="application/json";
+      _dio.options.headers["content-type"] = "application/json";
       Response response = await _dio.get(url,
           queryParameters: queryParameters, cancelToken: cancelTag);
       //响应数据
@@ -111,8 +113,11 @@ class DioUtils {
           return ResponseInfo(data: data);
         } else {
           //业务代码异常
-          return ResponseInfo.error(code: responseMap["code"],message:  responseMap["message"]);
+          return ResponseInfo.error(
+              code: responseMap["code"], message: responseMap["message"]);
         }
+      } else {
+        return ResponseInfo.error(code: 503, message: "数据格式无法识别");
       }
     } catch (e, s) {
       //异常
@@ -124,12 +129,13 @@ class DioUtils {
   ///[url]请求链接
   ///[formDataMap]formData 请求参数
   ///[jsonMap] JSON 格式
-  Future<ResponseInfo> postRequest(
-      {@required String url,
-      Map<String, dynamic> formDataMap,
-      Map<String, dynamic> jsonMap,
-      CancelToken cancelTag}) async {
-    FormData form;
+  Future<ResponseInfo> postRequest({
+    required String url,
+    Map<String, dynamic>? formDataMap,
+    Map<String, dynamic>? jsonMap,
+    CancelToken? cancelTag,
+  }) async {
+    FormData? form;
     if (formDataMap != null) {
       form = FormData.fromMap(formDataMap);
     }
@@ -139,8 +145,7 @@ class DioUtils {
     //发起post请求
     try {
       Response response = await _dio.post(url,
-          data: form == null ? jsonMap : form,
-          cancelToken: cancelTag);
+          data: form == null ? jsonMap : form, cancelToken: cancelTag);
       //响应数据
       dynamic responseData = response.data;
       if (responseData is Map<String, dynamic>) {
@@ -154,9 +159,10 @@ class DioUtils {
         } else {
           //业务代码异常
           return ResponseInfo.error(
-              code: responseMap["code"],
-              message:responseMap["message"]);
+              code: responseMap["code"], message: responseMap["message"]);
         }
+      } else {
+        return ResponseInfo.error(code: 503, message: "数据格式无法识别");
       }
     } catch (e, s) {
       return errorController(e, s);
@@ -197,22 +203,22 @@ class DioUtils {
       //其他错误
       responseInfo.message = "未知错误";
     }
-    responseInfo.success=false;
+    responseInfo.success = false;
     return Future.value(responseInfo);
   }
 
   Future<BaseOptions> buildOptions(BaseOptions options) async {
     ///请求header的配置
-    options.headers["productId"]=Platform.isAndroid?"Android":"IOS";
-    options.headers["application"]="coalx";
+    options.headers["productId"] = Platform.isAndroid ? "Android" : "IOS";
+    options.headers["application"] = "coalx";
 
     //获取当前App的版本信息
-    PackageInfo   packageInfo = await PackageInfo.fromPlatform();
+    PackageInfo packageInfo = await PackageInfo.fromPlatform();
     String appName = packageInfo.appName;
     String packageName = packageInfo.packageName;
     String version = packageInfo.version;
     String buildNumber = packageInfo.buildNumber;
-    options.headers["appVersion"]="$version";
+    options.headers["appVersion"] = "$version";
 
     return Future.value(options);
   }
@@ -225,13 +231,8 @@ class ResponseInfo {
   dynamic data;
 
   ResponseInfo(
-      {this.success = true,
-        this.code = 200,
-        this.data,
-        this.message = "请求成功"});
+      {this.success = true, this.code = 200, this.data, this.message = "请求成功"});
 
   ResponseInfo.error(
-      {this.success = false,
-        this.code = 201,
-        this.message = "请求异常"});
+      {this.success = false, this.code = 201, this.message = "请求异常"});
 }

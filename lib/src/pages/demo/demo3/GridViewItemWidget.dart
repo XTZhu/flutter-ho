@@ -15,7 +15,7 @@ import 'GridViewBean.dart';
 class GridViewItemWidget extends StatefulWidget {
   final GridBean bean;
 
-  const GridViewItemWidget({Key key, this.bean}) : super(key: key);
+  const GridViewItemWidget({Key? key, required this.bean}) : super(key: key);
 
   @override
   _GridViewItemWidgetState createState() => _GridViewItemWidgetState();
@@ -50,7 +50,7 @@ class _GridViewItemWidgetState extends State<GridViewItemWidget> {
   }
 
   Container buildContainer() {
-    Color normalColor = Colors.grey[200];
+    Color normalColor = Colors.grey[200]!;
 
     //如果是选中
     if (widget.bean.isSelect) {

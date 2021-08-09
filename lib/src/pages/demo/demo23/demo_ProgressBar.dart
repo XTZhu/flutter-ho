@@ -35,7 +35,7 @@ class DemoBackdropFilterPage extends StatefulWidget {
 class _DemoBackdropFilterPageState extends State<DemoBackdropFilterPage>
     with SingleTickerProviderStateMixin {
   bool _isLoading = true;
-  Timer _timer;
+  late Timer _timer;
 
   @override
   void initState() {
@@ -121,7 +121,7 @@ typedef OpenDragListener = void Function(int value);
 
 ///抽屉控制器
 class DragController {
-  OpenDragListener _openDragListener;
+  late OpenDragListener _openDragListener;
 
   ///控制器中添加监听
   setOpenDragListener(OpenDragListener listener) {
@@ -161,10 +161,10 @@ class CustomProgressWidget extends StatefulWidget {
   final String subTitle;
 
   const CustomProgressWidget({
-    Key key,
+    Key? key,
     this.progress = 0,
     this.total = 100,
-    this.controller,
+    required this.controller,
     this.title = "00",
     this.subTitle = "%",
     this.titleStyle = const TextStyle(
@@ -181,9 +181,9 @@ class CustomProgressWidget extends StatefulWidget {
 
 class _CustomProgressWidgetState extends State<CustomProgressWidget>
     with SingleTickerProviderStateMixin {
-  AnimationController _animationController;
+  late AnimationController _animationController;
 
-  Animation<double> _animation;
+  late Animation<double> _animation;
 
   @override
   void initState() {
@@ -234,7 +234,8 @@ class _CustomProgressWidgetState extends State<CustomProgressWidget>
                   completePercent: _currentProgress * 1.0,
                   completeColor: Colors.white,
                   completeWidth: 10.0,
-                  lineColor: Colors.transparent),
+                  lineColor: Colors.transparent,
+                  lineColors: []),
             ),
           ),
         ),
@@ -256,6 +257,7 @@ class _CustomProgressWidgetState extends State<CustomProgressWidget>
                   completeWidth: 2.0,
                   lineColor: Colors.deepPurple.withAlpha(200),
                   completeColor: Colors.blue,
+                  lineColors: [],
                 ),
                 child: Center(
                   child: Column(
@@ -347,7 +349,7 @@ class MyPainter extends CustomPainter {
     this.isDividerRound = false,
     this.isGradient = false,
     this.endAngle = pi * 2,
-    this.lineColors,
+    required this.lineColors,
     this.isTransfrom = false,
     // this.shadowColor,
   });
@@ -464,8 +466,8 @@ class MyGradientPainter extends CustomPainter {
 
   MyGradientPainter({
     this.start = 0.0,
-    this.lineColors,
-    this.value,
+    required this.lineColors,
+    required this.value,
     this.width = 4.0,
     this.endAngle = pi * 2,
   });

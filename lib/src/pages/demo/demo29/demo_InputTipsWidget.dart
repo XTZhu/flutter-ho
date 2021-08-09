@@ -64,17 +64,17 @@ class _DemoInputTipsWidgetPageState extends State<DemoInputTipsWidgetPage> {
 }
 
 class InputTipsWidget extends StatefulWidget {
-  final List<String> tipeList;
+  final List<String>? tipeList;
 
-  final TextEditingController textEditingController;
+  final TextEditingController? textEditingController;
 
   //输入框的文本样式
-  final TextStyle inputTextStyle;
+  final TextStyle? inputTextStyle;
 
   //高亮提示
-  final TextStyle hightTextStyle;
-  final InputDecoration inputDecoration;
-  final Function(String value) clickAction;
+  final TextStyle? hightTextStyle;
+  final InputDecoration? inputDecoration;
+  final Function(String value)? clickAction;
 
   InputTipsWidget(
       {this.tipeList,
@@ -113,14 +113,14 @@ class InputTipsWidgetState extends State<InputTipsWidget> {
               stream: _streamController.stream,
               initialData: "",
               builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
-                if (snapshot.data.length == 0 || widget.tipeList == null) {
+                if (snapshot.data!.length == 0 || widget.tipeList == null) {
                   return Container();
                 }
 
                 List<String> themList = [];
-                for (int i = 0; i < widget.tipeList.length; i++) {
-                  String pre = widget.tipeList[i];
-                  if (pre.contains(snapshot.data)) {
+                for (int i = 0; i < widget.tipeList!.length; i++) {
+                  String pre = widget.tipeList![i];
+                  if (pre.contains(snapshot.data!)) {
                     themList.add(pre);
                   }
                 }
@@ -140,12 +140,12 @@ class InputTipsWidgetState extends State<InputTipsWidget> {
                       itemCount: themList.length,
                       itemBuilder: (BuildContext context, int index) {
                         String tips = themList[index];
-                        String currentStr = snapshot.data;
+                        String currentStr = snapshot.data!;
                         return GestureDetector(
                           child: buildItemWidget(tips, currentStr),
                           onTap: () {
                             if (widget.clickAction != null) {
-                              widget.clickAction(tips);
+                              widget.clickAction!(tips);
                               _streamController.add("");
                             }
                           },

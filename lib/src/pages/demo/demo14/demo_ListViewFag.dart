@@ -133,7 +133,7 @@ class _DemoListViewFlagPageState extends State<DemoListViewFlagPage> {
 class Demo14ListItemWidget extends StatefulWidget {
   final int index;
 
-  const Demo14ListItemWidget({Key key, this.index}) : super(key: key);
+  const Demo14ListItemWidget({Key? key, required this.index}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() {
@@ -190,17 +190,17 @@ class _Demo14ListItemWidgetState extends State<Demo14ListItemWidget> {
 ///ListView 自定义滑动监听回调
 class CustomScrollDelegate extends SliverChildBuilderDelegate {
   //定义滑动回调监听
-  Function(int firstIndex, int lastIndex) scrollCallBack;
+  Function(int firstIndex, int lastIndex) ? scrollCallBack;
 
   //构造函数
-  CustomScrollDelegate(builder, {int itemCount, this.scrollCallBack})
+  CustomScrollDelegate(builder, {required int itemCount, this.scrollCallBack})
       : super(builder, childCount: itemCount);
 
   @override
-  double estimateMaxScrollOffset(int firstIndex, int lastIndex,
+  double? estimateMaxScrollOffset(int firstIndex, int lastIndex,
       double leadingScrollOffset, double trailingScrollOffset) {
     if (scrollCallBack != null) {
-      scrollCallBack(firstIndex, lastIndex);
+      scrollCallBack!(firstIndex, lastIndex);
     }
     return super.estimateMaxScrollOffset(
         firstIndex, lastIndex, leadingScrollOffset, trailingScrollOffset);

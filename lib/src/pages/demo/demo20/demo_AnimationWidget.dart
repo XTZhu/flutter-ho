@@ -26,7 +26,7 @@ class DemoAnimatedBuilder extends StatefulWidget {
 class _DemoAnimatedBuilderState extends State<DemoAnimatedBuilder>
     with SingleTickerProviderStateMixin {
   //动画控制器
-  AnimationController _animationController;
+  late AnimationController _animationController;
 
   @override
   void initState() {
@@ -34,7 +34,6 @@ class _DemoAnimatedBuilderState extends State<DemoAnimatedBuilder>
     //0.0 - 1.0
     _animationController = new AnimationController(
         vsync: this, duration: Duration(milliseconds: 1800));
-
   }
 
   @override
@@ -59,7 +58,6 @@ class _DemoAnimatedBuilderState extends State<DemoAnimatedBuilder>
         //线性布局
         child: Column(
           children: [
-
             TransformAnimated(
               animation: _animationController,
               child: Column(
@@ -71,7 +69,6 @@ class _DemoAnimatedBuilderState extends State<DemoAnimatedBuilder>
                 ],
               ),
             ),
-
           ],
         ),
       ),
@@ -82,13 +79,13 @@ class _DemoAnimatedBuilderState extends State<DemoAnimatedBuilder>
 class TransformAnimated extends AnimatedWidget {
   Widget child;
 
-  TransformAnimated({this.child, Animation animation})
+  TransformAnimated({required this.child, required Animation animation})
       : super(listenable: animation);
 
   @override
   Widget build(BuildContext context) {
     //获取动画控制监听
-    Animation<double> animation = listenable;
+    Animation<double>? animation = listenable as Animation<double>?;
     //自定义
     return Container(
       color: Colors.grey[200],
@@ -96,7 +93,7 @@ class TransformAnimated extends AnimatedWidget {
       margin: EdgeInsets.only(
         left: 20,
         right: 20,
-        top: 60 * animation.value / 2,
+        top: 60 * animation!.value / 2,
       ),
       height: 260,
       //向下平移

@@ -25,7 +25,7 @@ class DemoAnimatedBuilder extends StatefulWidget {
 
 class _DemoAnimatedBuilderState extends State<DemoAnimatedBuilder>
     with SingleTickerProviderStateMixin {
-  AnimationController _animationController;
+  late AnimationController _animationController;
 
   @override
   void initState() {
@@ -57,13 +57,12 @@ class _DemoAnimatedBuilderState extends State<DemoAnimatedBuilder>
         padding: EdgeInsets.all(30),
         child: Column(
           children: [
-
             //动画构建器
             AnimatedBuilder(
               //动画控制器
               animation: _animationController,
               //动画布局构建
-              builder: (BuildContext context, Widget child) {
+              builder: (BuildContext context, Widget? child) {
                 return Container(
                   margin: EdgeInsets.only(top: 20 * _animationController.value),
                   color: Colors.grey[200],
@@ -85,7 +84,6 @@ class _DemoAnimatedBuilderState extends State<DemoAnimatedBuilder>
                 ],
               ),
             )
-
           ],
         ),
       ),

@@ -56,11 +56,12 @@ class _DemoConnectivityPageState extends State<DemoConnectivityPage> {
   }
 
   //获取网络类型
-  String _netType;
+  late String _netType;
 
   void isConnectedType() async {
     //获取网络连接类型
-    ConnectivityResult connectivityResult = await (Connectivity().checkConnectivity());
+    ConnectivityResult connectivityResult =
+        await (Connectivity().checkConnectivity());
 
     if (connectivityResult == ConnectivityResult.mobile) {
       // 网络类型为移动网络
@@ -68,7 +69,7 @@ class _DemoConnectivityPageState extends State<DemoConnectivityPage> {
     } else if (connectivityResult == ConnectivityResult.wifi) {
       // 网络类型为WIFI
       _netType = "WIFI";
-    }else{
+    } else {
       _netType = "未联接";
     }
     setState(() {});
@@ -84,6 +85,5 @@ class _DemoConnectivityPageState extends State<DemoConnectivityPage> {
       //
       print("有变化 ${result}");
     });
-
   }
 }

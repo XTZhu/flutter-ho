@@ -6,10 +6,10 @@ class DateSelectItemWidget extends StatefulWidget {
   final int end;
   final String unit;
   final int current;
-  final Function(int) selectAction;
+  final Function(int)? selectAction;
 
   const DateSelectItemWidget(
-      {Key key,
+      {Key? key,
       this.start = 2020,
       this.end = 2120,
       this.unit = "年",
@@ -73,7 +73,7 @@ class _DateSelectItemWidgetState extends State<DateSelectItemWidget> {
           this._selectIndex = index;
           if (widget.selectAction != null) {
             //回调
-            widget.selectAction(widget.start + index);
+            widget.selectAction!(widget.start + index);
           }
         },
         itemBuilder: (context, index) {

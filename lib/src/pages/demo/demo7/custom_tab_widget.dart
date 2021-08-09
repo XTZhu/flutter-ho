@@ -73,7 +73,10 @@ class CustomTabWidget extends StatefulWidget {
   final Function(int index) onTap;
 
   const CustomTabWidget(
-      {Key key, this.tabTitleList, this.select = 0, this.onTap})
+      {Key? key,
+      required this.tabTitleList,
+      this.select = 0,
+      required this.onTap})
       : super(key: key);
 
   @override
@@ -82,7 +85,7 @@ class CustomTabWidget extends StatefulWidget {
 
 class _CustomTabWidgetState extends State<CustomTabWidget> {
   List<TabModel> _list = [];
-  int _currentIndex;
+  int _currentIndex = 0;
 
   @override
   void initState() {
@@ -101,7 +104,7 @@ class _CustomTabWidgetState extends State<CustomTabWidget> {
     _list = [];
     for (int i = 0; i < widget.tabTitleList.length; i++) {
       String title = widget.tabTitleList[i];
-      _list.add(TabModel(title: title, select: _currentIndex == i));
+      _list.add(TabModel(title: title, select: _currentIndex == i, id: i));
     }
     widget.tabTitleList.forEach((element) {});
   }
@@ -117,8 +120,8 @@ class _CustomTabWidgetState extends State<CustomTabWidget> {
       itemBuilder: (BuildContext context, int index) {
         TabModel _tabModel = _list[index];
 
-        Color bgColor = Colors.grey[200];
-        Color borderColor = Colors.grey[200];
+        Color bgColor = Colors.grey[200]!;
+        Color borderColor = Colors.grey[200]!;
         Color textColor = Colors.black;
         if (_tabModel.select) {
           bgColor = Colors.white;
@@ -217,5 +220,5 @@ class TabModel {
   //true 为选中
   bool select;
 
-  TabModel({this.id, this.title, this.select = false});
+  TabModel({required this.id, required this.title, this.select = false});
 }

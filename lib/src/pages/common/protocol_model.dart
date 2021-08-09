@@ -16,8 +16,8 @@ import 'common_webview.dart';
 /// 代码清单
 ///代码清单
 class ProtocolModel {
-  TapGestureRecognizer _registProtocolRecognizer;
-  TapGestureRecognizer _privacyProtocolRecognizer;
+  late TapGestureRecognizer _registProtocolRecognizer;
+  late TapGestureRecognizer _privacyProtocolRecognizer;
 
   ///用来显示 用户协议对话框
   Future<bool> showProtocolFunction(BuildContext context) async {

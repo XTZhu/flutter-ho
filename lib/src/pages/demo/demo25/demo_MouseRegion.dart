@@ -93,11 +93,11 @@ class _DemoMouseRegionPageState extends State<DemoMouseRegionPage> {
     //x 当前鼠标位置
     double x = event.position.dx;
     double y = event.position.dy;
-
+    RenderObject? renderObject = _globalKey.currentContext!.findRenderObject();
     //获取文本组件的属性信息
-    RenderBox renderBox = _globalKey.currentContext.findRenderObject();
+    RenderBox? renderBox = renderObject as RenderBox?;
     //文本组件的左上角点坐标
-    Offset offset = renderBox.localToGlobal(Offset.zero);
+    Offset offset = renderBox!.localToGlobal(Offset.zero);
 
     double topX = offset.dx;
     double topY = offset.dy;

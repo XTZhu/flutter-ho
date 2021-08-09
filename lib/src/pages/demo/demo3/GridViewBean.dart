@@ -10,5 +10,5 @@ class GridBean {
   String title;
   bool isSelect;
 
-  GridBean({this.title, this.isSelect = false});
+  GridBean({required this.title, this.isSelect = false});
 }

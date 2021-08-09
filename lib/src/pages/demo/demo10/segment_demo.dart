@@ -93,10 +93,10 @@ class _SegmentPageState extends State {
         //当前选中的索引
         groupValue: _currentIndex,
         //点击回调
-        onValueChanged: (int index) {
+        onValueChanged: (int? index) {
           print("当前选中 $index");
           setState(() {
-            _currentIndex = index;
+            _currentIndex = index ?? 0;
           });
         },
       ),

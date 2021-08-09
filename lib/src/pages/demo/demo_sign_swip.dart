@@ -23,7 +23,7 @@ class SignSwiperPage extends StatefulWidget {
 class _SignSwiperPageState extends State<SignSwiperPage>
     with SingleTickerProviderStateMixin {
   //动画控制器
-  AnimationController _animationController;
+  late AnimationController _animationController;
 
   @override
   void initState() {

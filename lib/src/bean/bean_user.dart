@@ -8,8 +8,8 @@
 /// 代码清单
 ///代码清单
 class UserBean {
-  String userName;
-  int userAge;
+  String userName = "";
+  int userAge = 0;
 
   ///常用用于解析JSON数据
   UserBean.fromMap(Map<String, dynamic> map) {

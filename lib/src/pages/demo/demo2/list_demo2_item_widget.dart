@@ -14,7 +14,7 @@ class ListViewDemo2Item extends StatefulWidget {
   final int index;
 
   ///Ctrl + 回车键自动提示补全
-  const ListViewDemo2Item({Key key, this.index}) : super(key: key);
+  const ListViewDemo2Item({Key? key, required this.index}) : super(key: key);
 
   @override
   _ListViewDemo2ItemState createState() => _ListViewDemo2ItemState();

@@ -17,7 +17,7 @@ import 'package:video_player/video_player.dart';
 class VideoDetails2Widget extends StatefulWidget {
   final StreamController streamController;
 
-  VideoDetails2Widget({this.streamController});
+  VideoDetails2Widget({required this.streamController});
 
   @override
   _VideoDetailsWidgetState createState() => _VideoDetailsWidgetState();
@@ -25,7 +25,7 @@ class VideoDetails2Widget extends StatefulWidget {
 
 class _VideoDetailsWidgetState extends State<VideoDetails2Widget> {
   //创建视频播放控制器
-  VideoPlayerController _controller;
+  late VideoPlayerController _controller;
   bool _isPlay = false;
 
   @override
@@ -64,8 +64,8 @@ class _VideoDetailsWidgetState extends State<VideoDetails2Widget> {
   void dispose() {
     _controller.dispose();
     _streamController.close();
-    if (_timer.isActive) {
-      _timer.cancel();
+    if (_timer != null && _timer!.isActive) {
+      _timer!.cancel();
     }
     super.dispose();
   }
@@ -95,7 +95,7 @@ class _VideoDetailsWidgetState extends State<VideoDetails2Widget> {
     );
   }
 
-  Timer _timer;
+  Timer? _timer;
   double _opacity = 1.0;
   bool _isFirst = true;
 
@@ -195,8 +195,8 @@ class _VideoDetailsWidgetState extends State<VideoDetails2Widget> {
       //如果视频正在播放中 再次点击停止播放
       stopVideo();
       //停止播放状态下 取消隐藏的计时器
-      if (_timer.isActive) {
-        _timer.cancel();
+      if (_timer != null && _timer!.isActive) {
+        _timer!.cancel();
       }
     } else {
       //开始播放视频
